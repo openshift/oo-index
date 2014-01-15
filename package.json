@@ -1,0 +1,26 @@
+{
+  "name": "oo-index",
+  "description": "A simple index of applications and services that can be run on the OpenShift platform",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "config": "0.4.x",
+    "requireindex": "1.0.x",
+    "restify": "2.5.x"
+  },
+  "devDependencies": {
+    "request": "2.24.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openshift/oo-index.git"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js"
+}
