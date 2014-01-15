@@ -18,15 +18,28 @@ You can [spin up your own hosted instance of this project on OpenShift Online](h
 Every entry in the `quickstatart.json` file should include the following attributes:
 
     {
-     "name":"Ghost",
-      "website":"http://tryghost.org/",
-      "version":"0.1",
-      "initial_git_url":"https://github.com/openshift-quickstart/openshift-ghost-quickstart.git",
-      "cartridges":["nodejs-0.10"],
-      "env_variables":[{"name":"value"},{"name":"value"}],
-      "tags":["node.js","ghost","blog"],
-      "summary":"Ghost is a free, open, simple blogging platform that's available to anyone who wants to use it"
-    }</javascript>
+      "name": "Ghost",
+      "website": "http://tryghost.org/",
+      "version": "0.1",
+      "initial_git_url": "https://github.com/openshift-quickstart/openshift-ghost-quickstart.git",
+      "cartridges": ["nodejs-0.10"],
+      "env_variables": {"name1":"value1","name2":"value2"},
+      "tags": ["node.js","ghost","blog"],
+      "description": "Ghost is a free, open, simple blogging platform that's available to anyone who wants to use it"
+    }
+
+The above data should comply with the following format guidelines:
+
+* **name** - a simple string, no hyphens, spaces, or other special characters allowed (a-zA-Z0-9)
+* **website** - URL pointing to a project homepage (or to a live demo)
+* **version** - The release version for this project, usually a numeric string.
+* **git_repo_url** - a URL that points to the project's source code.
+* **cartridges** - csv list of strings, starting with the base cartridge type, and continuing with any additional cartridge-based dependencies
+* **env_variables** - a hash of name, value pairs that can be used to intialize the application
+* **tags** - a csv list of relevant terms and labels
+* **description** - a basic project description in plain text, with all double-quotes escaped (replacing all instances of `"` with `\"`).
+
+Pull requests that don't meet this criteria will be rejected.
 
 ## Contribute via Pull Request
 
@@ -42,7 +55,6 @@ Every entry in the `quickstatart.json` file should include the following attribu
         git push
     
 5. Then, [send us a Pull Request](https://github.com/openshift/oo-index/pulls) and we'll update [our hosted index](http://app-shifter.rhcloud.com)
-
 
 #### Copyright
 
