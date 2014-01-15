@@ -9,7 +9,7 @@ This repository contains two major components:
 
 ## Host your own index
 
-You can [spin up your own hosted instance of this project on OpenShift Online](https://openshift.redhat.com/app/console/application_types/custom?name=index&initial_git_url=https%3A%2F%2Fgithub.com/openshift/oo-index.git&cartridges[]=nodejs-0.10) in a single click, or use the [rhc cpmmand line tool](https://www.openshift.com/get-started#cli) to help configure your local development environment and your OpenShift-hosted environment in a single step:
+You can [spin up your own hosted instance of this project on OpenShift Online](https://openshift.redhat.com/app/console/application_types/custom?name=index&initial_git_url=https%3A%2F%2Fgithub.com/openshift/oo-index.git&cartridges[]=nodejs-0.10) in a single click, or use the [rhc command line tool](https://www.openshift.com/get-started#cli) to help configure your local development environment and your OpenShift-hosted environment in a single step:
 
     rhc app create index nodejs-0.10 --from-code=https://github.com/openshift/oo-index.git
 
