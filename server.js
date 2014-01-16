@@ -26,10 +26,10 @@ app.get(/\/js\/?.*/, restify.serveStatic({directory: './js/'}));
 app.get(/\/img\/?.*/, restify.serveStatic({directory: './img/'}));
 
 app.get(/\/quickstart.json/, function myHandler(req, res, next) {
-  data = fs.readFileSync(__dirname + '/quickstart.json').toString();
-  console.log(data);
-  var response = JSON.parse(data);
-  res.json(200, JSON.stringify(data));
+  var data = fs.readFileSync(__dirname + '/quickstart.json')
+  var json = JSON.parse(data.toString())
+  console.dir(json)
+  res.json(200, json)
 });
 
 app.listen(config.port, config.ip, function () {
