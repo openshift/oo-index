@@ -59,3 +59,8 @@ Pull requests that don't meet this criteria will be rejected.
 #### Copyright
 
 OpenShift Origin, except where otherwise noted, is released under the Apache License 2.0. See the LICENSE file located in each component directory. 
+
+
+
++[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dmueller2001/oo-index/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+ +
