@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" ng-app="appindex">
+<head>
+  <meta charset="utf-8">
+  <title>OpenShift Origin Index</title>
+  <link rel="stylesheet" href="bundle.css"/>
+</head>
+<body>
+  <ul class="menu">
+    <li><a href="#/">home</a></li>
+    <li><a href="#/list">search</a></li>
+    <li><a href="#/show">show</a></li>
+  </ul>
+
+  <div ng-view></div>
+
+  <div ng-controller="HelloController">
+    Hi {{dude}}!
+  </div>
+
+  <script src="bundle.js"></script>
+</body>
+</html>

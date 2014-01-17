@@ -9,18 +9,27 @@
   },
   "dependencies": {
     "config": "0.4.x",
-    "requireindex": "1.0.x",
     "restify": "2.5.x"
   },
   "devDependencies": {
-    "request": "2.24.x"
+    "watchify": "~0.1.0",
+    "catw": "~0.0.1",
+    "tap": "~0.4.4"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/openshift/oo-index.git"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start-dev": "npm run watch & npm start",
+    "watch": "npm run watch-js & npm run watch-css",
+    "watch-css": "catw css/*.css -o static/bundle.css -v",
+    "watch-js": "watchify js/appindex.js -o static/bundle.js -dv",
+    "build-js": "browserify js/appindex.js > static/bundle.js",
+    "build-css": "cat css/*.css > static/bundle.css",
+    "build": "npm run build-js && npm run build-css",
+    "test": "tap test/*.js"
   },
   "main": "server.js"
 }
