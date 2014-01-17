@@ -13,6 +13,23 @@ You can [spin up your own hosted instance of this project on OpenShift Online](h
 
     rhc app create index nodejs-0.10 --from-code=https://github.com/openshift/oo-index.git
 
+### Local Development
+
+First, make sure that your npm dependencies are available:
+
+    npm install
+    
+Then, start a local web server:
+    
+    npm start
+
+The project source can be re-bundled by running:
+
+    npm run build
+    
+Additional scripts for assisting with development work are [defined in the project's `package.json` file](https://github.com/openshift/oo-index/blob/master/package.json#L23).
+
+
 ### Data Specification
 
 Every entry in the `quickstart.json` file should include the following attributes:
