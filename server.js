@@ -9,28 +9,12 @@ app.use(restify.CORS())
 app.use(restify.fullResponse())
 
 // Routes
-app.get('/status', function (req, res, next)
-{
-  res.send("{status: 'ok'}");
-});
-
-app.get('/', function (req, res, next)
-{
-  var data = fs.readFileSync(__dirname + '/index.html');
-  res.status(200);
-  res.header('Content-Type', 'text/html');
-  res.end(data.toString().replace(/host:port/g, req.header('Host')));
-});
-app.get(/\/css\/?.*/, restify.serveStatic({directory: './css/'}));
-app.get(/\/js\/?.*/, restify.serveStatic({directory: './js/'}));
-app.get(/\/img\/?.*/, restify.serveStatic({directory: './img/'}));
-
 app.get(/\/quickstart.json/, function myHandler(req, res, next) {
-  data = fs.readFileSync(__dirname + '/quickstart.json').toString();
-  console.log(data);
-  var response = JSON.parse(data);
-  res.json(200, JSON.stringify(data));
+  var data = fs.readFileSync(__dirname + '/quickstart.json')
+  var json = JSON.parse(data.toString())
+  res.json(200, json)
 });
+app.get(/\/.*/, restify.serveStatic({'directory': './static/', 'default':"index.html"}));
 
 app.listen(config.port, config.ip, function () {
   console.log( "Listening on " + config.ip + ", port " + config.port )

@@ -13,31 +13,51 @@ You can [spin up your own hosted instance of this project on OpenShift Online](h
 
     rhc app create index nodejs-0.10 --from-code=https://github.com/openshift/oo-index.git
 
+### Local Development
+
+First, make sure that your npm dependencies are available:
+
+    npm install
+    
+Then, start a local web server:
+    
+    npm start
+
+The project source can be re-bundled by running:
+
+    npm run build
+    
+Additional scripts for assisting with development work are [defined in the project's `package.json` file](https://github.com/openshift/oo-index/blob/master/package.json#L23).
+
+
 ### Data Specification
 
-Every entry in the `quickstatart.json` file should include the following attributes:
+Every entry in the `quickstart.json` file should include the following attributes:
 
     {
       "name": "Ghost",
-      "website": "http://tryghost.org/",
-      "version": "0.1",
-      "initial_git_url": "https://github.com/openshift-quickstart/openshift-ghost-quickstart.git",
+      "default_app_name": 'ghost',
+      "git_repo_url": "https://github.com/openshift-quickstart/openshift-ghost-quickstart.git",
       "cartridges": ["nodejs-0.10"],
+      "website": "http://tryghost.org/",
+      "version": "0.4",
       "env_variables": {"name1":"value1","name2":"value2"},
       "tags": ["node.js","ghost","blog"],
       "description": "Ghost is a free, open, simple blogging platform that's available to anyone who wants to use it"
     }
 
-The above data should comply with the following format guidelines:
+And should comply with the following data format guidelines:
 
-* **name** - a simple string, no hyphens, spaces, or other special characters allowed (a-zA-Z0-9)
-* **website** - URL pointing to a project homepage (or to a live demo)
-* **version** - The release version for this project, usually a numeric string.
-* **git_repo_url** - a URL that points to the project's source code.
-* **cartridges** - csv list of strings, starting with the base cartridge type, and continuing with any additional cartridge-based dependencies
-* **env_variables** - a hash of name, value pairs that can be used to intialize the application
-* **tags** - a csv list of relevant terms and labels
-* **description** - a basic project description in plain text, with all double-quotes escaped (replacing all instances of `"` with `\"`).
+* **name** - a human-readable name for this project, service, or application (required)
+* **default_app_name** - a short name suggestion, for use in the hosted application url. No hyphens, spaces, or other special characters allowed (a-zA-Z0-9 only, optional) 
+* **git_repo_url** - a URL that points to the project's source code (required)
+* **cartridges** - csv list of strings, starting with the base cartridge type, and continuing with any additional cartridge-based dependencies (required for quickstart applications)
+* **website** - URL pointing to a project homepage (optional)
+* **demo_url** - A link to a live demo (optional)
+* **version** - The release version for this project, usually a numeric string (optional)
+* **env_variables** - a hash of name, value pairs that can be used to intialize the application (optional)
+* **tags** - a csv list of relevant terms and labels (optional)
+* **description** - a basic project description in plain text, with quotes escaped (optional)
 
 Pull requests that don't meet this criteria will be rejected.
 
