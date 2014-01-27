@@ -1,22 +1,34 @@
-require('./angular-1.29.min.js');
-require('./angular-route-1.29.js');
-require('./ui-bootstrap-tpls-0.10.0.min.js');
+require('./vendor/angular-1.29.min.js');
+require('./vendor/angular-route-1.29.js');
+require('./vendor/ui-bootstrap-tpls-0.10.0.min.js');
 
-require('./services');
+require('./services/services');
 require('./filters');
 
-window.HelloController = function($scope) {
-  $scope.dude = 'AngularJS';
-  $scope.index = require('../quickstart.json');
-};
+/* Appindex */
 
-var ListCtrl = function ($scope) {
-  $scope.shopping = {
-    list: ['Milk', 'Bread', 'Biscuits']
-  };
-};
+angular.module('appindex', ['ngRoute'])
 
-angular.module('appindex', ['ngRoute']);
+.config(function($routeProvider) {
+  $routeProvider
+    .when('/', {
+      controller: 'HomeController',
+      templateUrl: 'templates/home.html'
+    })
+    .when('/add', {
+      controller:'ProjectController',
+      templateUrl:'templates/project/add.html'
+    })
+    .otherwise({
+      redirectTo:'/'
+    });
+})
+
+.controller('HomeController', function($scope) {
+})
+
+.controller('ProjectController', function($scope) {
+});
 
 //angular.module('appindex', ['appindex.filters', 'appindex.services'])
 //  .config(['$routeProvider', function($routeProvider) {
