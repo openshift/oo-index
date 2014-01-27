@@ -1,0 +1,71 @@
+body { background: url(../img/pattern.png) #333; color: #fff; font-family: "Open Sans", "Helvetica Neue", Helvetica, "Liberation Sans", Arial,sans-serif; padding-top: 40px; position: relative; }
+
+body > .container { padding-bottom: 100px; }
+
+hr { border-color: #aaa; }
+
+h2 { color: #fff; }
+
+/* Helpers */
+
+.gray-border { border: 1px solid #333; }
+
+.white-background { background: #000 url(../img/pattern.png); }
+
+.padding-30 { padding: 30px; }
+
+.right-block-helper { padding: 0 0 20px; }
+.right-block-helper h4,
+.right-block-helper p { color: #dadada; }
+
+.row.header { margin-top: 30px; }
+.no-padding { padding-left: 0; padding-right: 0; }
+
+.box-list { background-color: #000; background-color: rgba(0,0,0,0.45); }
+.box-list:hover { background-color: rgba(0,0,0,0.3); }
+
+.box-list ul { list-style: none; min-height: 200px; padding: 0; }
+.box-list ul li { background: rgba(255,255,255,0.02); font-size: 11px; height: 25px; line-height: 20px; margin: 2px 0; overflow: hidden; padding: 3px 0; }
+.box-list ul li { color: #666; }
+
+.box-list ul li:first-child { background: rgba(77,167,79,0.07); font-size: 13px; font-weight: bold; }
+.box-list ul li:nth-child(2),
+.box-list ul li:nth-child(3) { background: rgba(255,255,255,0.04); font-size: 13px; }
+
+.border-right { border-right: 1px dotted #000; }
+
+.list { padding: 15px; }
+
+
+/* Header */
+.navbar { background: #000; border-bottom: 1px solid #222; font-family: Overpass,"Helvetica Neue",Helvetica,Arial,sans-serif; min-height: 40px; }
+
+.navbar-brand { background: url(../img/oo-index-logo.png); height: 26px; margin: 8px 10px 0; padding: 0; text-indent: -5000em; width: 118px; }
+.navbar-brand h1 { display: inline; }
+
+.navbar-nav > li > a { background: #333; color: #ccc; font-size: 12px; line-height: 21px; margin: 5px 0 0 2px; padding: 5px 10px; text-transform: uppercase; }
+.nav > li > a:hover, .nav > li > a:focus { background: #aaa; color: #000; }
+
+.navbar-nav > .active > a,
+.navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus { background: #000; color: #fff; }
+
+
+/* Forms */
+
+.btn, .form-control { border-radius: 0px; }
+
+label { color: #dadada; }
+
+
+/* Footer */
+
+footer { background: #000; bottom: 0; min-height: 30px; width: 100%; }
+
+
+
+
+/* md */
+@media (min-width: 992px) {
+	.right-block-helper { float: right; padding: 60px 0 15px 30px; }
+}
