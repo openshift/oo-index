@@ -1,4 +1,4 @@
-body { background: url(../img/pattern.png) #333; color: #fff; font-family: "Open Sans", "Helvetica Neue", Helvetica, "Liberation Sans", Arial,sans-serif; padding-top: 40px; position: relative; }
+body { background: url(../img/pattern.png) #111; color: #fff; font-family: "Open Sans", "Helvetica Neue", Helvetica, "Liberation Sans", Arial,sans-serif; padding-top: 40px; position: relative; }
 
 body > .container { padding-bottom: 100px; }
 
@@ -8,7 +8,7 @@ h2 { color: #fff; }
 
 /* Helpers */
 
-.gray-border { border: 1px solid #333; }
+.gray-border { border: 1px solid #222; }
 
 .white-background { background: #000 url(../img/pattern.png); }
 
@@ -18,11 +18,14 @@ h2 { color: #fff; }
 .right-block-helper h4,
 .right-block-helper p { color: #dadada; }
 
-.row.header { margin-top: 30px; }
-.no-padding { padding-left: 0; padding-right: 0; }
+.row.header { margin-bottom: 30px; margin-top: 30px; }
 
-.box-list { background-color: #000; background-color: rgba(0,0,0,0.45); }
-.box-list:hover { background-color: rgba(0,0,0,0.3); }
+.no-padding { padding-left: 0; padding-right: 0; }
+.no-padding-left { padding-left: 0; }
+.no-padding-right { padding-right: 0; }
+
+.box-list .background { background-color: #000; background-color: rgba(0,0,0,0.45); padding: 5px 15px; }
+.box-list:hover .background { background-color: rgba(0,0,0,0.40); }
 
 .box-list ul { list-style: none; min-height: 200px; padding: 0; }
 .box-list ul li { background: rgba(255,255,255,0.02); font-size: 11px; height: 25px; line-height: 20px; margin: 2px 0; overflow: hidden; padding: 3px 0; }
@@ -31,6 +34,8 @@ h2 { color: #fff; }
 .box-list ul li:first-child { background: rgba(77,167,79,0.07); font-size: 13px; font-weight: bold; }
 .box-list ul li:nth-child(2),
 .box-list ul li:nth-child(3) { background: rgba(255,255,255,0.04); font-size: 13px; }
+
+.box-list ul li:hover { margin-left: -5px; background: rgba(255,255,255,0.1); }
 
 .border-right { border-right: 1px dotted #000; }
 
