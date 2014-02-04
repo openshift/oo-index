@@ -1,39 +1,49 @@
+'use strict';
+
 require('./vendor/angular-1.29.min.js');
 require('./vendor/angular-route-1.29.js');
 require('./vendor/ui-bootstrap-tpls-0.10.0.min.js');
+require('./vendor/select2.js');
 
-require('./services/services');
+/*
+ * Services
+ */ 
+require('./services');
+
+/*
+ * Filters
+ */
 require('./filters');
 
-/* Appindex */
+/*
+ * Controllers
+ */ 
+angular.module('ooindex.controllers', []);
 
-angular.module('appindex', ['ngRoute'])
+require('./controllers/home.js');
+require('./controllers/resource.js');
+require('./controllers/search.js');
 
-.config(function($routeProvider) {
-  $routeProvider
-    .when('/', {
-      controller: 'HomeController',
-      templateUrl: 'templates/home.html'
-    })
-    .when('/add', {
-      controller:'ProjectController',
-      templateUrl:'templates/project/add.html'
-    })
-    .otherwise({
-      redirectTo:'/'
-    });
-})
+/*
+ * Appindex
+ */
+angular.module('ooindex', ['ngRoute', 'ooindex.controllers', 'ooindex.services', 'ooindex.filters'])
 
-.controller('HomeController', function($scope) {
-})
-
-.controller('ProjectController', function($scope) {
-});
-
-//angular.module('appindex', ['appindex.filters', 'appindex.services'])
-//  .config(['$routeProvider', function($routeProvider) {
-//    $routeProvider.when('/', {templateUrl: 'templates/home.html'});
-//    $routeProvider.when('/list', {templateUrl: 'templates/list.html'});
-//    $routeProvider.when('/show', {templateUrl: 'templates/show.html'});
-//    $routeProvider.otherwise({redirectTo: '/'});
-//  }]);
+  /*
+   * Routes
+   */
+  .config(function($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'templates/home.html'
+      })
+      .when('/search', {
+        templateUrl: 'templates/search.html'
+      })
+      .when('/add', {
+        templateUrl:'templates/resource/add.html'
+      })
+      .otherwise({
+        redirectTo:'/'
+      });
+  });
