@@ -163,28 +163,33 @@ OO_INDEX_OWNER = 'oo-index';
 
 // this is a temporary hack to avoid asking user to sign-in to github.
 // it uses an application token issued by the qstart owner.
-auth_token = window.prompt('Type yout GitHubOAuth2 token.\n\nCreate one on:\n  GitHub\n     Account Settings\n      Applications\n       Personal Access Tokens');
-if (auth_token) {
-	$.ajaxSetup({
-		beforeSend: function(xhr) {
-			xhr.setRequestHeader('Authorization', 'token ' + auth_token);
-		}
-	});
+//auth_token = window.prompt('Type yout GitHubOAuth2 token.\n\nCreate one on:\n  GitHub\n     Account Settings\n      Applications\n       Personal Access Tokens', '2e4fa8055289eed839a0c728e0e6eac128183cfe');
+$.getJSON('/auth/user', function(data){
+    var auth_token = data.accessToken;
 
-	// this is the new cartridge, as submited by someone
-	var new_qs = {
-		name: 'Another brick in the wall',
-		description: 'My awesome OpenShift quickstart for this very popular app',
-		type: 'Quickstart'
-	};
+    if (auth_token) {
+        $.ajaxSetup({
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'token ' + auth_token);
+            }
+        });
 
-	// entry point.
-	// first and second params: user/repo on github where cart|qstart is
-	// third param: qstart metadata
-	add_quickstart('caruccio', 'test-oo-index', new_qs);
-} else {
-	document.write('Missing auth token. Aborted...');
-}
+        // this is the new cartridge, as submited by someone
+        var new_qs = {
+            name: 'Another brick in the wall',
+            description: 'My awesome OpenShift quickstart for this very popular app',
+            type: 'Quickstart'
+        };
+
+        // entry point.
+        // first and second params: user/repo on github where cart|qstart is
+        // third param: qstart metadata
+        add_quickstart('marekjelen', 'oo-index', new_qs);
+    } else {
+        document.write('Missing auth token. Aborted...');
+    }
+
+});
 
 });
 </script>
