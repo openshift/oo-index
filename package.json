@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "config": "0.4.x",
-    "restify": "2.5.x"
+    "restify": "2.5.x",
+    "passport": "0.2.x",
+    "passport-github": "0.1.x",
+    "connect": "2.13.x"
   },
   "devDependencies": {
     "watchify": "~0.1.0",
