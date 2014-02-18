@@ -26,9 +26,11 @@ passport.use(
     new GitHubStrategy({
         clientID: config.oauth_key,
         clientSecret: config.oauth_secret,
-        callbackURL: config.oauth_callback
+        callbackURL: config.oauth_callback,
+        scope: 'repo,user,gist'
     },
     function(accessToken, refreshToken, profile, done) {
+        profile.accessToken = accessToken;
         return done(null, profile);
     }
 ));
@@ -45,12 +47,13 @@ app.get('/auth', passport.authorize('github'));
 
 app.get('/auth/callback', passport.authorize('github'), function(req, res) {
     req.session.user = req.account.username;
+    req.session.accessToken = req.account.accessToken;
     res.writeHead(302, { 'Location': '/' });
     res.end();
 });
 
 app.get('/auth/user', function(req, res) {
-    res.json(200, { username: req.session.user });
+    res.json(200, { username: req.session.user, accessToken: req.session.accessToken  });
 });
 
 // OO-index related handlers
