@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+/*
+ * Please note this is only a quick-and-dirty demonstration of
+ * how could be implemented a PR. No error is ever handled.
+ *
+ * If you run it tiwice, be sure to delete the created branch
+ * before the second run.
+ *
+ * Reference: http://developer.github.com/v3/git/
+ */
+$(document).ready(function() {
+
+// helpers
+function req_params(type, username, reponame, suffix, data, headers) {
+	var params = {
+		url: 'https://api.github.com/repos/' + username + '/' + reponame + (suffix[0] == '/' ? '' : '/git/') + suffix,
+		type: type,
+		dataType: 'json',
+		contentType: 'application/json',
+		headers: headers ? headers : {}
+	};
+
+	if (data) {
+		params.data = JSON.stringify(data, null, 3);
+	}
+
+	console.log(type + ' ' + suffix);
+	return params;
+}
+
+function get_params(username, reponame, suffix, data, headers) {
+	return req_params('GET', username, reponame, suffix, data, headers);
+}
+
+function post_params(username, reponame, suffix, data, headers) {
+	return req_params('POST', username, reponame, suffix, data, headers);
+}
+// end of helpers
+
+function create_pull_request(username, reponame, blob, parent_commit, tree) {
+	// create a blob with updated quickstart.json
+	$.ajax(post_params(
+		username,
+		reponame,
+		'blobs',
+		{ content: blob, encoding: 'utf-8' }
+	)).done(function(new_blob) {
+		var quickstart = null;
+		// update tree entry with blob's new sha
+		for (var i = 0; i < tree.tree.length; ++i) {
+			if (tree.tree[i].path == 'quickstart.json') {
+				quickstart = tree.tree[i];
+			}
+		}
+		if (!quickstart) {
+			//!oops
+			alert('Invalid tree');
+			return;
+		}
+
+		var new_tree_entry = quickstart;
+		new_tree_entry.sha = new_blob.sha;
+
+		// create updated tree
+		$.ajax(post_params(
+			username,
+			reponame,
+			'trees',
+			{ base_tree: tree.sha, tree: [ new_tree_entry ] }
+		)).done(function(new_tree) {
+			var commit_data = {
+				message: 'Quickstart add request: ' + username + '/' + reponame,
+				tree: new_tree.sha,
+				parents: [ parent_commit ]
+			};
+			//create the commit
+			$.ajax(post_params(
+				username,
+				reponame,
+				'commits',
+				commit_data
+			)).done(function(new_commit) {
+				//create new branch from commit
+				$.ajax(post_params(
+					username,
+					reponame,
+					'refs',
+					{ref: 'refs/heads/' + username + '-' + reponame, sha: new_commit.sha}
+				)).done(function(new_ref) {
+						console.log(new_ref.sha);
+						document.write('New branch: ' + new_ref.ref);
+						//create new pull request
+						$.ajax(post_params(
+							OO_INDEX_OWNER,
+							reponame,
+							'/pulls',
+							{
+								title: 'Quickstart add request: ' + username + '/' + reponame,
+								head: username + ':' + username + '-' + reponame,
+								base: 'master',
+								body: 'Automatically generated PR for oo-index'
+							}
+						)).done(function(pr) {
+								document.write('<br>PR submited to' + OO_INDEX_OWNER + ': ' + pr.head.ref);
+							}
+						);
+					}
+				);
+			});
+		});
+	});
+}
+
+function add_quickstart(username, reponame, quickstart_data) {
+	// list commits
+	$.ajax(get_params(
+		username,
+		reponame,
+		'/commits'
+	)).done(function(commits) {
+			// get latest commit
+			var commit_sha = commits[0].sha;
+			// extract tree from commit
+			$.ajax(get_params(
+				username,
+				reponame,
+				'trees/' + commit_sha
+			)).done(function(trees) {
+				// find sha of blob 'quickstart.json'
+				for (var i = 0; i < trees.tree.length; ++i) {
+					console.log(' + ' + trees.tree[i].path);
+					if (trees.tree[i].path == 'quickstart.json') {
+						$.ajax(get_params(
+							username,
+							reponame,
+							'blobs/' + trees.tree[i].sha,
+							null,
+							{Accept: 'application/vnd.github.v3.raw+json'}
+						)).done(function(quickstart_list) {
+							// here is our file.
+							// we can now create a branch, change the file and send a PR
+							quickstart_list.push(quickstart_data);
+
+							// keep sorted in order to minimize conflicts
+							quickstart_list.sort(function(a, b) {
+								return a.git_repo_url == b.git_repo_url ? 0 : (a.git_repo_url > b.git_repo_url ? 1 : -1);
+							});
+							create_pull_request(username, reponame, JSON.stringify(quickstart_list, null, 3), commit_sha, trees);
+						});
+						break;
+					} //if quickstart.json
+				} //for tree[].path
+			});
+		});
+}
+
+// location of the origin oo-index repo, to where the PR is being made.
+OO_INDEX_OWNER = 'oo-index';
+
+// this is a temporary hack to avoid asking user to sign-in to github.
+// it uses an application token issued by the qstart owner.
+//auth_token = window.prompt('Type yout GitHubOAuth2 token.\n\nCreate one on:\n  GitHub\n     Account Settings\n      Applications\n       Personal Access Tokens', '2e4fa8055289eed839a0c728e0e6eac128183cfe');
+$.getJSON('/auth/user', function(data){
+    var auth_token = data.accessToken;
+
+    if (auth_token) {
+        $.ajaxSetup({
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'token ' + auth_token);
+            }
+        });
+
+        // this is the new cartridge, as submited by someone
+        var new_qs = {
+            name: 'Another brick in the wall',
+            description: 'My awesome OpenShift quickstart for this very popular app',
+            type: 'Quickstart'
+        };
+
+        // entry point.
+        // first and second params: user/repo on github where cart|qstart is
+        // third param: qstart metadata
+        add_quickstart('marekjelen', 'oo-index', new_qs);
+    } else {
+        document.write('Missing auth token. Aborted...');
+    }
+
+});
+
+});
+</script>
+</head>
+</html>
