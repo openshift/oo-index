@@ -1,3 +1,6 @@
 .idea
 *.iml
 node_modules
+static/bundle.css
+static/bundle.js
+TODO

@@ -1,27 +1,49 @@
-require('./angular-1.29.min.js');
-require('./angular-route-1.29.js');
-require('./ui-bootstrap-tpls-0.10.0.min.js');
+'use strict';
 
+require('./vendor/angular-1.29.min.js');
+require('./vendor/angular-route-1.29.js');
+require('./vendor/ui-bootstrap-tpls-0.10.0.min.js');
+require('./vendor/select2.js');
+
+/*
+ * Services
+ */ 
 require('./services');
+
+/*
+ * Filters
+ */
 require('./filters');
 
-window.HelloController = function($scope) {
-  $scope.dude = 'AngularJS';
-  $scope.index = require('../quickstart.json');
-};
+/*
+ * Controllers
+ */ 
+angular.module('ooindex.controllers', []);
 
-var ListCtrl = function ($scope) {
-  $scope.shopping = {
-    list: ['Milk', 'Bread', 'Biscuits']
-  };
-};
+require('./controllers/home.js');
+require('./controllers/resource.js');
+require('./controllers/search.js');
 
-angular.module('appindex', ['ngRoute']);
+/*
+ * Appindex
+ */
+angular.module('ooindex', ['ngRoute', 'ooindex.controllers', 'ooindex.services', 'ooindex.filters'])
 
-//angular.module('appindex', ['appindex.filters', 'appindex.services'])
-//  .config(['$routeProvider', function($routeProvider) {
-//    $routeProvider.when('/', {templateUrl: 'templates/home.html'});
-//    $routeProvider.when('/list', {templateUrl: 'templates/list.html'});
-//    $routeProvider.when('/show', {templateUrl: 'templates/show.html'});
-//    $routeProvider.otherwise({redirectTo: '/'});
-//  }]);
+  /*
+   * Routes
+   */
+  .config(function($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'templates/home.html'
+      })
+      .when('/search', {
+        templateUrl: 'templates/search.html'
+      })
+      .when('/add', {
+        templateUrl:'templates/resource/add.html'
+      })
+      .otherwise({
+        redirectTo:'/'
+      });
+  });
