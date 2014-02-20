@@ -6,5 +6,5 @@ module.exports = {
 
   oauth_key: process.env.OAUTH_KEY,
   oauth_secret: process.env.OAUTH_SECRET,
-  oauth_callback: process.env.OAUTH_CALLBACK
+  oauth_callback: '//' + process.env.OPENSHIFT_APP_DNS + '/auth/callback'
 }
