@@ -33,6 +33,7 @@
     "build-js": "browserify js/appindex.js > static/bundle.js",
     "build-css": "cat css/*.css > static/bundle.css",
     "build": "npm run build-js && npm run build-css",
+    "install": "npm run build-js && npm run build-css",
     "test": "tap test/*.js"
   },
   "main": "server.js"
