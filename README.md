@@ -4,31 +4,29 @@ This package is a general-purpose stand-alone [index](http://app-shifter.rhcloud
 
 This repository contains two major components: 
 
-1. A basic user interface for browsing, searching, and launching open cloud compatible applications and services, built with help from [Angular-js and Twitter bootstrap](http://angular-ui.github.io/bootstrap/).
-2. Default content for [the index](http://app-shifter.rhcloud.com), which is loaded from the included [`quickstart.json` file](https://github.com/openshift/oo-index/blob/master/quickstart.json).
+1. A basic user interface for browsing, searching, and launching open cloud compatible applications and services, built with help from [Python Flask](http://flask.pocoo.org/) and [Twitter bootstrap](http://angular-ui.github.io/bootstrap/).
+2. Default content for [the index](http://app-shifter.rhcloud.com), which is loaded from the included [`quickstart.json` file](https://github.com/openshift/oo-index/blob/master/wsgi/static/quickstart.json).
 
 ## Host your own index
 
-You can [spin up your own hosted instance of this project on OpenShift Online](https://openshift.redhat.com/app/console/application_types/custom?name=index&initial_git_url=https%3A%2F%2Fgithub.com/openshift/oo-index.git&cartridges[]=nodejs-0.10) in a single click, or use the [rhc command line tool](https://www.openshift.com/get-started#cli) to help configure your local development environment and your OpenShift-hosted environment in a single step:
+First you must generate you Github Client ID and Secret. Access you GitHub account settings page, select "Applications" and "Register a New Application".
+Fill in the form with:
 
-    rhc app create index nodejs-0.10 --from-code=https://github.com/openshift/oo-index.git
+- Application Name: oo-index
+- Homepage URL: https://index-$namespace.rhcloud.com
+- Authorization callback URL: https://index-$namespace.rhcloud.com/login/callback
+
+Press "Register Application" and take note of your credentials.
+
+You can [spin up your own hosted instance of this project on OpenShift Online](https://openshift.redhat.com/app/console/application_types/custom?name=index&initial_git_url=https%3A%2F%2Fgithub.com/openshift/oo-index.git&cartridges[]=python-2.7) in a single click, or use the [rhc command line tool](https://www.openshift.com/get-started#cli) to help configure your local development environment and your OpenShift-hosted environment in a single step:
+
+    rhc app create index python-2.7 --from-code=https://github.com/openshift/oo-index.git GITHUB_CLIENT_ID=[github-client-id] GITHUB_CLIENT_SECRET=[github-client-secret] OO_INDEX_GITHUB_REPONAME=index OO_INDEX_GITHUB_USERNAME=[your-github-username]
 
 ### Local Development
 
-First, make sure that your npm dependencies are available:
+Simply start a local web server with your Application credentials:
 
-    npm install
-    
-Then, start a local web server:
-    
-    npm start
-
-The project source can be re-bundled by running:
-
-    npm run build
-    
-Additional scripts for assisting with development work are [defined in the project's `package.json` file](https://github.com/openshift/oo-index/blob/master/package.json#L23).
-
+    ./start-devel.sh GITHUB_CLIENT_ID GITHUB_CLIENT_SECRET
 
 ### Data Specification
 
@@ -67,7 +65,7 @@ Pull requests that don't meet this criteria will be rejected.
 2. Add an openshift-compatible service or application to the project's `quickstarts.json` file, making sure to include each of the [required fields](#data-specification).
 3. **Add** and **Commit** your changes locally:
 
-        git add quickstart.json
+        git add wsgi/static/quickstart.json
         git commit -m 'Adding a Wordpress application to the project index'
     
 4. **Push** your changes to GitHub:
