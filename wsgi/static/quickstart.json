@@ -2512,5 +2512,23 @@
       "alternate_name": "Joomla Example", 
       "cartridges": "php-5.3, mysql-5.1", 
       "type": "quickstart"
+   },
+   {
+
+      "updated_at": "2014-02-20T15:45:37Z", 
+      "owner": "https://github.com/getupcloud", 
+      "id": 16969329, 
+      "description": "Wordpress com suporte a PT_BR", 
+      "size": 13664, 
+      "forks": 0, 
+      "watchers": 0, 
+      "name": "wordpress-exemplo", 
+      "language": "PHP", 
+      "created_at": "2014-02-19T00:45:44Z", 
+      "stargazers": 0, 
+      "owner_type": "User", 
+      "alternate_name": "wordpress-exemplo", 
+      "cartridges": [], 
+      "type": "quickstart"
    }
 ]
