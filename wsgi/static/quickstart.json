@@ -2495,5 +2495,22 @@
       "alternate_name": "Burning Tyger Moodle", 
       "cartridges": "php-5.3, cron-1.4, mysql-5.1, phpmyadmin-4", 
       "type": "quickstart"
+   },
+   {   
+      "updated_at": "2014-02-15T01:12:45Z", 
+      "owner": "https://github.com/openshift", 
+      "id": 2571617, 
+      "description": "Joomla quick start repo for OpenShift", 
+      "size": 7767, 
+      "forks": 16, 
+      "watchers": 17, 
+      "name": "joomla-example", 
+      "language": "PHP", 
+      "created_at": "2011-10-13T18:56:26Z", 
+      "stargazers": 17, 
+      "owner_type": "Organization", 
+      "alternate_name": "Joomla Example", 
+      "cartridges": "php-5.3, mysql-5.1", 
+      "type": "quickstart"
    }
 ]
