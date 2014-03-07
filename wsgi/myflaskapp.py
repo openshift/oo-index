@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os, sys
+import ast
 import json
 from flask import Flask, g, request, session, url_for, redirect, flash, render_template
 from flask.ext.github import GitHub as AuthGitHub
@@ -32,11 +33,80 @@ except KeyError:
 # set it to point to your own oo-index public repo
 app.config['OO_INDEX_GITHUB_USERNAME'] = os.environ.get('OO_INDEX_GITHUB_USERNAME', 'openshift')
 app.config['OO_INDEX_GITHUB_REPONAME'] = os.environ.get('OO_INDEX_GITHUB_REPONAME', 'oo-index')
-app.config['OO_INDEX_QUICKSTART_JSON'] = os.environ.get('OO_INDEX_QUICKSTART_JSON', 'wsgi/static/quickstart.json').strip('/')
+#XXX: we're using quickstart.jon from git repo itself.
+app.config['OO_INDEX_QUICKSTART_JSON'] = os.environ.get('OO_INDEX_QUICKSTART_JSON', 'wsgi/static/quickstart.json')
 
-auth = AuthGitHub(app)
+if not app.config['OO_INDEX_QUICKSTART_JSON'].startswith('/'):
+	if 'OPENSHIFT_REPO_DIR' in os.environ:
+		app.config['OO_INDEX_QUICKSTART_JSON'] = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], app.config['OO_INDEX_QUICKSTART_JSON'])
+
+## Jinja2 filters ########
+
+@app.template_filter('owner_display')
+def owner_display(quickstart):
+	'''Given a `quickstart`, generate a link to quickstart owner.
+	'''
+	if quickstart.get('owner_avatar_url'):
+		link = '<img alt="{qs[owner_name]}" src="{qs[owner_avatar_url]}" height="20" width="20">{qs[owner_name]}'.format(qs=quickstart)
+	elif quickstart.get('owner_name'):
+		link = quickstart['owner_name']
+	else:
+		link = quickstart['owner'].split('/')[-1]
+	return '<a href="{qs[owner]}">{link}</a>'.format(qs=quickstart, link=link)
+
+@app.template_filter('short_name')
+def short_name(name):
+	if name.lower() == 'quickstart':
+		return 'QS'
+	elif name.lower() == 'cartridge':
+		return 'CART'
+	else:
+		return name
+
+## Quickstart file ########
+class Quickstarts:
+	'''Parse and cache content of file `quickstarts`.
+	'''
+	timestamp = 0
+	cached = None
+
+	def __init__(self):
+		self.path = app.config['OO_INDEX_QUICKSTART_JSON']
+		self.data = Quickstarts.cached
+
+		# Read file only if it has changed
+		try:
+			with open(app.config['OO_INDEX_QUICKSTART_JSON'], 'r') as f:
+				st = os.fstat(f.fileno())
+				if Quickstarts.cached is not None and st.st_mtime == Quickstarts.timestamp:
+					return
+
+				print >>sys.stderr, 'Refreshing' if Quickstarts.cached else 'Reading', self.path
+				content = f.read()
+				Quickstarts.timestamp = st.st_mtime
+		except Exception, ex:
+			print >>sys.stderr, "Error loading file %s: %s" % (self.path, ex)
+			raise
+
+		try:
+			self.data = Quickstarts.cached = ast.literal_eval(content)
+		except Exception, ex:
+			print >>sys.stderr, "Error parsing file %s: %s" % (self.path, ex)
+			raise
+
+	def most_starred(self, count=10):
+		return sorted(self.data, key=lambda x: int(x['stargazers']), reverse=True)[:count]
+
+	def most_popular(self, count=10):
+		return sorted(self.data, key=lambda x: int(x['watchers']), reverse=True)[:count]
+
+	def latest(self, count=10):
+		#TODO: we need a field here to sort by inclusion timestamp
+		return self.data[-count:]
 
 ## authentication ##########
+
+auth = AuthGitHub(app)
 
 @app.before_request
 def before_request():
@@ -74,7 +144,8 @@ def logout():
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	qs = Quickstarts()
+	return render_template('index.html', most_starred=qs.most_starred(), most_popular=qs.most_popular(), latest=qs.latest())
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -198,6 +269,14 @@ def send_pull_request(form_data):
 		qs['type'] = qs_t
 	except PyGitHub.UnknownObjectException:
 		raise OOIndexError("Username or repository not found: %s/%s" % (qs_u, qs_r))
+
+	try:
+		owner = PyGitHub.Github().get_user(qs_u)
+		qs['owner_name']       = owner.name
+		qs['owner_avatar_url'] = owner.avatar_url
+	except:
+		qs['owner_name']       = qs['owner']
+		qs['owner_avatar_url'] = ''
 
 	# read content of original quickstar.json
 	# fork repo if needed
