@@ -20,7 +20,11 @@ Press "Register Application" and take note of your credentials.
 
 You can [spin up your own hosted instance of this project on OpenShift Online](https://openshift.redhat.com/app/console/application_types/custom?name=index&initial_git_url=https%3A%2F%2Fgithub.com/openshift/oo-index.git&cartridges[]=python-2.7) in a single click, or use the [rhc command line tool](https://www.openshift.com/get-started#cli) to help configure your local development environment and your OpenShift-hosted environment in a single step:
 
-    rhc app create index python-2.7 --from-code=https://github.com/openshift/oo-index.git GITHUB_CLIENT_ID=[github-client-id] GITHUB_CLIENT_SECRET=[github-client-secret] OO_INDEX_GITHUB_REPONAME=index OO_INDEX_GITHUB_USERNAME=[your-github-username]
+    rhc app create index python-2.7 GITHUB_CLIENT_ID=[github-client-id] GITHUB_CLIENT_SECRET=[github-client-secret] OO_INDEX_GITHUB_REPONAME=index OO_INDEX_GITHUB_USERNAME=[your-github-username]
+    cd index
+    git remote add upstream https://github.com/openshift/oo-index.git
+    git pull -s recursive -X theirs upstream master
+    git push
 
 ### Local Development
 
