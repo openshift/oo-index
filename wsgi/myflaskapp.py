@@ -33,7 +33,12 @@ except KeyError:
 # set it to point to your own oo-index public repo
 app.config['OO_INDEX_GITHUB_USERNAME'] = os.environ.get('OO_INDEX_GITHUB_USERNAME', 'openshift')
 app.config['OO_INDEX_GITHUB_REPONAME'] = os.environ.get('OO_INDEX_GITHUB_REPONAME', 'oo-index')
-app.config['OO_INDEX_QUICKSTART_JSON'] = os.environ.get('OO_INDEX_QUICKSTART_JSON', 'wsgi/static/quickstart.json').strip('/')
+#XXX: we're using quickstart.jon from git repo itself.
+app.config['OO_INDEX_QUICKSTART_JSON'] = os.environ.get('OO_INDEX_QUICKSTART_JSON', 'wsgi/static/quickstart.json')
+
+if not app.config['OO_INDEX_QUICKSTART_JSON'].startswith('/'):
+	if 'OPENSHIFT_REPO_DIR' in os.environ:
+		app.config['OO_INDEX_QUICKSTART_JSON'] = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], app.config['OO_INDEX_QUICKSTART_JSON'])
 
 ## Jinja2 filters ########
 
