@@ -19,6 +19,7 @@
 
 	<div class="row header">
 		<div class="col-xs-6">
+			<!-- TODO: implement search -->
 			<form class="form-inline row ng-pristine ng-valid" role="form" ng-submit="search()">
 				<div class="form-group col-xs-9">
 					<input type="search" class="form-control" placeholder="name, type (cartridge or quickstart), owner, language" required="">
@@ -37,71 +38,23 @@
 		</div>
 	</div>
 
+	<!-- TODO:
+	       - fix columns width
+	       - add button "deploy" (glyphicon-cloud_upload)
+	-->
 	<div class="row list">
 		<div class="col-md-4 box-list no-padding-left">
 			<div class="background hover-shadow">
 				<h4 class="text-center">Popular</h4>
 				<ul>
+				{% for qs in most_popular %}
 					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
+						<div class="col-xs-2 small"><span class="glyphicon glyphicon-eye-open"></span> {{qs.watchers}}</div>
+						<div class="col-xs-4"> <a href="{{qs.git_repo_url}}">{{ qs.name }}</a></div>
+						<div class="col-xs-2">{{ qs.type|short_name }}</div>
+						<div class="col-xs-4">{{ qs|owner_display|safe }}</div>
 					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>	
-					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/quickstart/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/quickstart/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
-					<li>
-						<div class="col-xs-4"> <a href="#/quickstart/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-
-						<div class="col-xs-4 small"><img alt="Nagib" height="20" src="https://0.gravatar.com/avatar/e0b154b08179a2798510d4d63eafae8e?d=https%3A%2F%2Fidenticons.github.com%2F99f5a12273c3338adff0f524f2bcae03.png&amp;r=x&amp;s=140" width="20"> Nagib</div>
-					</li>
+				{% endfor %}
 				</ul>
 			</div>
 		</div>
@@ -110,56 +63,14 @@
 			<div class="background hover-shadow">
 				<h4 class="text-center">Most stars</h4>
 				<ul>
+				{% for qs in most_starred %}
 					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 3243</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
+						<div class="col-xs-2 small"><span class="glyphicon glyphicon-star"></span> {{qs.stargazers}}</div>
+						<div class="col-xs-4"> <a href="{{qs.git_repo_url}}">{{ qs.name }}</a></div>
+						<div class="col-xs-2">{{ qs.type|short_name }}</div>
+						<div class="col-xs-4">{{ qs|owner_display|safe }}</div>
 					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 2001</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>	
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 649</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 503</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 230</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 102</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 99</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 67</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 32</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
-					<li>
-						<div class="col-xs-4 small"><span class="glyphicon glyphicon-star"></span> 15</div>
-						<div class="col-xs-4"> <a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Cartridge </div>
-					</li>
+				{% endfor %}
 				</ul>
 			</div>
 		</div>
@@ -168,56 +79,15 @@
 			<div class="background hover-shadow">
 				<h4 class="text-center">New or recently updated</h4>
 				<ul>
+				{% for qs in most_starred %}
 					<li>
-						<div class="col-xs-3 small">1 min ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
+						<!-- TODO: humanize qs age -->
+						<div class="col-xs-2 small"><span class="glyphicon glyphicon-time"></span> 1 min ago</div>
+						<div class="col-xs-4"> <a href="{{qs.git_repo_url}}">{{ qs.name }}</a></div>
+						<div class="col-xs-2">{{ qs.type|short_name }}</div>
+						<div class="col-xs-4">{{ qs|owner_display|safe }}</div>
 					</li>
-					<li>
-						<div class="col-xs-3 small">5 min ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>	
-					<li>
-						<div class="col-xs-3 small">1 hour ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">3 hours ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">5 hours ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">1 day ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">5 days ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">9 days ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">20 days ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
-					<li>
-						<div class="col-xs-3 small">1 month ago</div>
-						<div class="col-xs-5"><a href="#/cartridge/play2java">play2java</a></div>
-						<div class="col-xs-4"> Quickstart </div>
-					</li>
+				{% endfor %}
 				</ul>
 			</div>
 		</div>
