@@ -33,12 +33,13 @@ except KeyError:
 # set it to point to your own oo-index public repo
 app.config['OO_INDEX_GITHUB_USERNAME'] = os.environ.get('OO_INDEX_GITHUB_USERNAME', 'openshift')
 app.config['OO_INDEX_GITHUB_REPONAME'] = os.environ.get('OO_INDEX_GITHUB_REPONAME', 'oo-index')
-#XXX: we're using quickstart.jon from git repo itself.
-app.config['OO_INDEX_QUICKSTART_JSON'] = os.environ.get('OO_INDEX_QUICKSTART_JSON', 'wsgi/static/quickstart.json')
+#XXX: we're using quickstart.json from git repo itself.
+app.config['OO_INDEX_QUICKSTART_JSON'] = os.environ.get('OO_INDEX_QUICKSTART_JSON', 'wsgi/static/quickstart.json').strip('/')
 
-if not app.config['OO_INDEX_QUICKSTART_JSON'].startswith('/'):
-	if 'OPENSHIFT_REPO_DIR' in os.environ:
-		app.config['OO_INDEX_QUICKSTART_JSON'] = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], app.config['OO_INDEX_QUICKSTART_JSON'])
+if 'OPENSHIFT_REPO_DIR' in os.environ:
+	app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH'] = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], app.config['OO_INDEX_QUICKSTART_JSON'])
+else:
+	app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH'] = app.config['OO_INDEX_QUICKSTART_JSON']
 
 ## Jinja2 filters ########
 
@@ -71,12 +72,12 @@ class Quickstarts:
 	cached = None
 
 	def __init__(self):
-		self.path = app.config['OO_INDEX_QUICKSTART_JSON']
+		self.path = app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH']
 		self.data = Quickstarts.cached
 
 		# Read file only if it has changed
 		try:
-			with open(app.config['OO_INDEX_QUICKSTART_JSON'], 'r') as f:
+			with open(app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH'], 'r') as f:
 				st = os.fstat(f.fileno())
 				if Quickstarts.cached is not None and st.st_mtime == Quickstarts.timestamp:
 					return
