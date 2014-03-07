@@ -94,8 +94,6 @@ class Quickstarts:
 			print >>sys.stderr, "Error parsing file %s: %s" % (self.path, ex)
 			raise
 
-		print json.dumps(self.data, indent=3)
-
 	def most_starred(self, count=10):
 		return sorted(self.data, key=lambda x: int(x['stargazers']), reverse=True)[:count]
 
