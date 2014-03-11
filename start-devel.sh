@@ -17,7 +17,7 @@ fi
 
 set -e
 
-[ -d virtenv ] || virtualenv virtenv
+[ -d virtenv ] || virtualenv --no-site-packages virtenv
 . virtenv/bin/activate
 egrep -o '[a-zA-Z0-9-]+==[0-9.]+' setup.py | xargs pip install
 
