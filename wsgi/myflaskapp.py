@@ -3,11 +3,13 @@
 import os, sys, re
 import ast
 import json
-from flask import Flask, g, request, session, url_for, redirect, flash, render_template, jsonify
-from flask.ext.github import GitHub as AuthGitHub
-import github as PyGitHub
-from collections import OrderedDict
 import requests
+import github as PyGitHub
+
+from flask import Flask, g, request, session, url_for, redirect, flash, render_template
+from flask.ext.github import GitHub as AuthGitHub
+from collections import OrderedDict
+
 
 class OOIndexError(Exception):
     '''OO-Index specific errors

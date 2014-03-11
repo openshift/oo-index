@@ -18,17 +18,22 @@
   </div>
 
  <div class="row list">
-    <div class="col-xs-12 box-list no-padding-left">
-      <div class="background shadow">
-        <h4 class="text-left">Result list</h4>
+    <div class="col-xs-12  no-padding-left">
+      <div class="background shadow" style="background: #fff; padding: 10px 30px;">
+        <h2 class="text-left" style="margin-bottom: 20px; color: #999;">Result list</h2>
         {% if quickstarts %}
-        <ul>
+        <ul style="margin: 0; padding: 0;">
           {% for qs in quickstarts %}
-            <li>
-              <div class="col-xs-2 small"><span class="glyphicon glyphicon-eye-open"></span> {{qs.watchers}}</div>
-              <div class="col-xs-4"> <a href="{{qs.git_repo_url}}">{{ qs.name }}</a></div>
-              <div class="col-xs-2">{{ qs.type|short_name }}</div>
-              <div class="col-xs-4">{{ qs|owner_display|safe }}</div>
+            <li style="list-style: none; margin-bottom: 40px">
+              <h4 style="text-transform: lowercase;"><a href="{{qs.git_repo_url}}">{{qs.name}}</a>
+                <small style="margin-right: 10px; margin-left: 10px;"><span class="glyphicon glyphicon-eye-open"></span> {{qs.watchers}}</small>
+                <small style="margin-right: 10px;"><span class="glyphicon glyphicon-star"></span> {{qs.stargazers}}</small>
+                <small >last update: {{qs.updated_at}}</small>
+              </h4>
+              <p>
+              <small><span class="glyphicon glyphicon-user" style="margin-right: 10px"></span><a href="{{qs.owner}}" target="_blank">{{qs.owner}}</a></small>
+              </p>
+              <p>{{qs.description}}</p>
             </li>
           {% endfor %}
         </ul>
