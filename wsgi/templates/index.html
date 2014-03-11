@@ -80,10 +80,9 @@
 			<div class="background hover-shadow">
 				<h4 class="text-center">New or recently updated</h4>
 				<ul>
-				{% for qs in most_starred %}
+				{% for qs in latest %}
 					<li>
-						<!-- TODO: humanize qs age -->
-						<div class="col-xs-2 small"><span class="glyphicon glyphicon-time"></span> 1 min ago</div>
+						<div class="col-xs-2 small"><span class="glyphicon glyphicon-time"></span>{{qs.submited_at|humanize_time}}</div>
 						<div class="col-xs-4"> <a href="{{qs.git_repo_url}}">{{ qs.name }}</a></div>
 						<div class="col-xs-2">{{ qs.type|short_name }}</div>
 						<div class="col-xs-4">{{ qs|owner_display|safe }}</div>
