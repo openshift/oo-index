@@ -135,18 +135,35 @@ class SearchEngine:
                - this have to return all cartridges
         '''
 
-        result = []
+        found_quickstarts = []
+
+        query = query.split(' ')
 
         for quickstart in self._all_quickstarts:
-            ''' TODO:
-                ----
-                1. Add some logic to split query in words
-                2. Adding the possibility of measuring relevance (ngrams)
-            '''
+            score = 0
 
-            # This is just a proof of concept implementation
-            if re.search(query, quickstart['name'], re.IGNORECASE):
-                result.append(quickstart)
+            for keyword in query:
+                # This is just a proof of concept implementation
+                # have to research for searching algorithm
+                if re.search(keyword, quickstart['name'], re.IGNORECASE):
+                    score += 4
+
+                if re.search(keyword, quickstart['owner'], re.IGNORECASE):
+                    score += 3
+
+                if re.search(keyword, quickstart['language'], re.IGNORECASE):
+                    score += 2
+
+                if re.search(keyword, quickstart['type'], re.IGNORECASE):
+                    score += 1
+
+            if score > 0:
+                found_quickstarts.append((score, quickstart))
+
+
+        found_quickstarts = sorted(found_quickstarts, key=lambda quickstart: quickstart[0], reverse=True)
+        result = [quickstart[1] for quickstart in found_quickstarts]
+
 
         return result
 
