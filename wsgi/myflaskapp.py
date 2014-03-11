@@ -142,7 +142,7 @@ class SearchEngine:
                 2. Adding the possibility of measuring relevance (ngrams)
             '''
 
-            # This is just a proof of consept implementation
+            # This is just a proof of concept implementation
             if re.search(query, quickstart['name'], re.IGNORECASE):
                 result.append(quickstart)
 
