@@ -77,7 +77,7 @@ class Quickstarts:
 
 		# Read file only if it has changed
 		try:
-			with open(app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH'], 'r') as f:
+			with open(self.path, 'r') as f:
 				st = os.fstat(f.fileno())
 				if Quickstarts.cached is not None and st.st_mtime == Quickstarts.timestamp:
 					return
