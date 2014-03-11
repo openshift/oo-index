@@ -6,3 +6,4 @@ static/bundle.js
 TODO
 .develo
 virtenv
+*.pyc

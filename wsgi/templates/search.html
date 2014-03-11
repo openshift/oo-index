@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row header">
+    <div class="col-xs-6">
+      <h1>Search for quickstarts</h1>
+      <br />
+      <!-- TODO: implement search -->
+      <form id="search" class="form-inline row ng-pristine ng-valid" role="form" method="get" action="/search">
+        <div class="form-group col-xs-9">
+          <input type="search" class="form-control" placeholder="name, type (cartridge or quickstart), owner, language" required="" name="query">
+        </div>
+        <div class="no-padding col-xs-3">
+          <button type="submit" class="btn btn-default" onclick="$('#search').submit()">search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+ <div class="row list">
+    <div class="col-xs-12 box-list no-padding-left">
+      <div class="background shadow">
+        <h4 class="text-left">Result list</h4>
+        {% if quickstarts %}
+        <ul>
+          {% for qs in quickstarts %}
+            <li>
+              <div class="col-xs-2 small"><span class="glyphicon glyphicon-eye-open"></span> {{qs.watchers}}</div>
+              <div class="col-xs-4"> <a href="{{qs.git_repo_url}}">{{ qs.name }}</a></div>
+              <div class="col-xs-2">{{ qs.type|short_name }}</div>
+              <div class="col-xs-4">{{ qs|owner_display|safe }}</div>
+            </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <div class="text-center">
+            <br />
+            <p class="lead">Sorry, there are no results :(</p>
+            <h3><a href="#">Perhaps it's time to add an image of your own?<a></h3>
+            <br />
+          </div>
+        {% endif %}
+      </div>
+    </div>
+{% endblock %}

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import os, sys
+import os, sys, re
 import ast
 import json
-from flask import Flask, g, request, session, url_for, redirect, flash, render_template
+from flask import Flask, g, request, session, url_for, redirect, flash, render_template, jsonify
 from flask.ext.github import GitHub as AuthGitHub
 import github as PyGitHub
 from collections import OrderedDict
@@ -105,6 +105,50 @@ class Quickstarts:
         #TODO: we need a field here to sort by inclusion timestamp
         return self.data[-count:]
 
+    def all(self, count=10):
+        return self.data
+
+class SearchEngine:
+    ''' Super simple search engine for quickstarts json.
+    '''
+
+    def __init__(self):
+        self._quickstarts = Quickstarts()
+        self._all_quickstarts = self._quickstarts.all()
+
+    def search(self, query):
+        ''' TODO:
+            ----
+            Sample queries:
+            1. jekyll
+            2. jekyll mignev
+            3. blog jekyll
+            4. latest
+               - latest quickstarts
+            5. popular
+               - most popular quickstarts
+            6. popular ruby
+               - most popular quickstarts that contains ruby as relevant word
+            7. cartridge
+               - this have to return all cartridges
+        '''
+
+        result = []
+
+        for quickstart in self._all_quickstarts:
+            ''' TODO:
+                ----
+                1. Add some logic to split query in words
+                2. Adding the possibility of measuring relevance (ngrams)
+            '''
+
+            # This is just a proof of consept implementation
+            if re.search(query, quickstart['name'], re.IGNORECASE):
+                result.append(quickstart)
+
+        return result
+
+
 ## authentication ##########
 
 auth = AuthGitHub(app)
@@ -147,6 +191,15 @@ def logout():
 def index():
     qs = Quickstarts()
     return render_template('index.html', most_starred=qs.most_starred(), most_popular=qs.most_popular(), latest=qs.latest())
+
+@app.route('/search', defaults = {'query': 'all'})
+def search(query = "all"):
+    serach_engine = SearchEngine()
+
+    query = request.args.get('query', "")
+    result = serach_engine.search(query)
+    return render_template('search.html', quickstarts=result)
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():

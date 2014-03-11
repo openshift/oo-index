@@ -21,12 +21,12 @@
 	<div class="row header">
 		<div class="col-xs-6">
 			<!-- TODO: implement search -->
-			<form class="form-inline row ng-pristine ng-valid" role="form" ng-submit="search()">
+			<form id="search" class="form-inline row ng-pristine ng-valid" role="form" method="get" action="/search">
 				<div class="form-group col-xs-9">
-					<input type="search" class="form-control" placeholder="name, type (cartridge or quickstart), owner, language" required="">
+					<input type="search" class="form-control" placeholder="name, type (cartridge or quickstart), owner, language" required="" name="query">
 				</div>
 				<div class="no-padding col-xs-3">
-					<button type="submit" class="btn btn-default">search</button>
+					<button type="submit" class="btn btn-default" onclick="$('#search').submit()">search</button>
 				</div>
 			</form>
 		</div>
