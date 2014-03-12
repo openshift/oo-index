@@ -5,11 +5,13 @@ import ast
 import json
 import requests
 import github as PyGitHub
+import dateutil.parser
+import datetime
 
 from flask import Flask, g, request, session, url_for, redirect, flash, render_template
 from flask.ext.github import GitHub as AuthGitHub
 from collections import OrderedDict
-
+from babel.dates import format_timedelta
 
 class OOIndexError(Exception):
     '''OO-Index specific errors
@@ -66,6 +68,11 @@ def short_name(name):
     else:
         return name
 
+@app.template_filter('humanize_time')
+def humanize_time(datestr):
+    dt = dateutil.parser.parse(datestr)
+    return format_timedelta(datetime.datetime.utcnow() - dt, locale='en_US') + ' ago'
+
 ## Quickstart file ########
 class Quickstarts:
     '''Parse and cache content of file `quickstarts`.
@@ -104,8 +111,7 @@ class Quickstarts:
         return sorted(self.data, key=lambda x: int(x['watchers']), reverse=True)[:count]
 
     def latest(self, count=10):
-        #TODO: we need a field here to sort by inclusion timestamp
-        return self.data[-count:]
+        return sorted(self.data, key=lambda x: x['submited_at'], reverse=True)[:count]
 
     def all(self, count=10):
         return self.data
@@ -348,6 +354,7 @@ def send_pull_request(form_data):
         qs['alternate_name'] = qs_n
         qs['cartridges'] = qs_c
         qs['type'] = qs_t
+        qs['submited_at'] = datetime.datetime.isoformat(datetime.datetime.utcnow())
     except PyGitHub.UnknownObjectException:
         raise OOIndexError("Username or repository not found: %s/%s" % (qs_u, qs_r))
 
