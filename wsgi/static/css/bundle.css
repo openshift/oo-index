@@ -93,7 +93,7 @@ footer { background: #333; bottom: 0; min-height: 100px; position: fixed; width:
 }
 
 .form-control .select2-choice .select2-arrow {
-    border-radius: 0 2px 2px 0;   
+    border-radius: 0 2px 2px 0;
 }
 
 .form-control.select2-container {
@@ -807,3 +807,44 @@ disabled look for disabled choices in the results dropdown
     width: 600px;
     font-size: large;
 }
+
+
+/* --- Search page --- */
+
+#search_page .background {
+  background: #fff;
+  padding: 10px 30px;
+}
+
+#search_page h2 {
+  margin-bottom: 20px;
+  color: #999;
+}
+
+#search_page ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#search_page ul li {
+  margin-bottom: 40px;
+}
+
+#search_page .package_title {
+  text-transform: lowercase;
+}
+
+#search_page .package_title small {
+  margin-right: 10px;
+}
+
+#search_page .package_title small:first-of-type {
+  margin-left: 10px;
+}
+
+#search_page ul li p span {
+  margin-right: 10px;
+}
+
+/* --- /Search page --- */

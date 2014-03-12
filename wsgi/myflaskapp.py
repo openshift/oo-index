@@ -138,24 +138,32 @@ class SearchEngine:
         found_quickstarts = []
 
         query = query.split(' ')
+        keywords_in_query = len(query)
 
         for quickstart in self._all_quickstarts:
+
             score = 0
+
+            # I think that the first word you are searching for
+            # is the most important
+            importance_factor = keywords_in_query
 
             for keyword in query:
                 # This is just a proof of concept implementation
                 # have to research for searching algorithm
                 if re.search(keyword, quickstart['name'], re.IGNORECASE):
-                    score += 4
+                    score += (4 * importance_factor)
 
                 if re.search(keyword, quickstart['owner'], re.IGNORECASE):
-                    score += 3
+                    score += (3 * importance_factor)
 
                 if re.search(keyword, quickstart['language'], re.IGNORECASE):
-                    score += 2
+                    score += (2 * importance_factor)
 
                 if re.search(keyword, quickstart['type'], re.IGNORECASE):
-                    score += 1
+                    score += (1 * importance_factor)
+
+                importance_factor -= 1
 
             if score > 0:
                 found_quickstarts.append((score, quickstart))
