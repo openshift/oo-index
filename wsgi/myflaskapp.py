@@ -110,7 +110,7 @@ class Quickstarts:
         return sorted(self.data, key=lambda x: int(x['watchers']), reverse=True)[:count]
 
     def latest(self, count=10):
-        return sorted(self.data, key=lambda x: x['submited_at'], reverse=True)[:count]
+        return sorted(self.data, key=lambda x: x['submitted_at'], reverse=True)[:count]
 
 ## authentication ##########
 
@@ -275,7 +275,7 @@ def send_pull_request(form_data):
         qs['alternate_name'] = qs_n
         qs['cartridges'] = qs_c
         qs['type'] = qs_t
-        qs['submited_at'] = datetime.datetime.isoformat(datetime.datetime.utcnow())
+        qs['submitted_at'] = datetime.datetime.isoformat(datetime.datetime.utcnow())
     except PyGitHub.UnknownObjectException:
         raise OOIndexError("Username or repository not found: %s/%s" % (qs_u, qs_r))
 
