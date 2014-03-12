@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import os, sys
+import os, sys, re
 import ast
 import json
-from flask import Flask, g, request, session, url_for, redirect, flash, render_template
-from flask.ext.github import GitHub as AuthGitHub
-import github as PyGitHub
-from collections import OrderedDict
 import requests
+import github as PyGitHub
 import dateutil.parser
 import datetime
+
+from flask import Flask, g, request, session, url_for, redirect, flash, render_template
+from flask.ext.github import GitHub as AuthGitHub
+from collections import OrderedDict
 from babel.dates import format_timedelta
 
 class OOIndexError(Exception):
@@ -112,6 +113,75 @@ class Quickstarts:
     def latest(self, count=10):
         return sorted(self.data, key=lambda x: x['submitted_at'], reverse=True)[:count]
 
+    def all(self, count=10):
+        return self.data
+
+class SearchEngine:
+    ''' Super simple search engine for quickstarts json.
+    '''
+
+    def __init__(self):
+        self._quickstarts = Quickstarts()
+        self._all_quickstarts = self._quickstarts.all()
+
+    def search(self, query):
+        ''' TODO:
+            ----
+            Sample queries:
+            1. jekyll
+            2. jekyll mignev
+            3. blog jekyll
+            4. latest
+               - latest quickstarts
+            5. popular
+               - most popular quickstarts
+            6. popular ruby
+               - most popular quickstarts that contains ruby as relevant word
+            7. cartridge
+               - this have to return all cartridges
+        '''
+
+        found_quickstarts = []
+
+        query = query.split(' ')
+        keywords_in_query = len(query)
+
+        for quickstart in self._all_quickstarts:
+
+            score = 0
+
+            # I think that the first word you are searching for
+            # is the most important
+            importance_factor = keywords_in_query
+
+            for keyword in query:
+                # This is just a proof of concept implementation
+                # have to research for searching algorithm
+                if re.search(keyword, quickstart['name'], re.IGNORECASE):
+                    score += (4 * importance_factor)
+
+                if re.search(keyword, quickstart['owner'], re.IGNORECASE):
+                    score += (3 * importance_factor)
+
+                if re.search(keyword, quickstart['language'], re.IGNORECASE):
+                    score += (2 * importance_factor)
+
+                if re.search(keyword, quickstart['type'], re.IGNORECASE):
+                    score += (1 * importance_factor)
+
+                importance_factor -= 1
+
+            if score > 0:
+                found_quickstarts.append((score, quickstart))
+
+
+        found_quickstarts = sorted(found_quickstarts, key=lambda quickstart: quickstart[0], reverse=True)
+        result = [quickstart[1] for quickstart in found_quickstarts]
+
+
+        return result
+
+
 ## authentication ##########
 
 auth = AuthGitHub(app)
@@ -154,6 +224,18 @@ def logout():
 def index():
     qs = Quickstarts()
     return render_template('index.html', most_starred=qs.most_starred(), most_popular=qs.most_popular(), latest=qs.latest())
+
+@app.route('/search', defaults = {'query': 'all'})
+def search(query = "all"):
+    serach_engine = SearchEngine()
+
+    query = request.args.get('query', "")
+    result = serach_engine.search(query)
+    return render_template('search.html', quickstarts=result)
+
+@app.route('/about')
+def about():
+    return render_template(‘about.html')
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():

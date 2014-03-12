@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div id="search_page">
+
+  <div class="row header">
+    <div class="col-xs-6">
+      <h1>Search for quickstarts</h1>
+      <br />
+      <!-- TODO: use search form as partial -->
+      {% include 'partials/search_form.html' %}
+    </div>
+  </div>
+
+ <div class="row list">
+    <div class="col-xs-12  no-padding-left">
+      <div class="background shadow">
+        {% if quickstarts %}
+        <h2 class="text-left">Result list</h2>
+        <ul>
+          {% for qs in quickstarts %}
+            <li>
+              <h4 class="package_title"><a href="{{qs.git_repo_url}}">{{qs.name}}</a>
+                <small><span class="glyphicon glyphicon-eye-open"></span> {{qs.watchers}}</small>
+                <small><span class="glyphicon glyphicon-star"></span> {{qs.stargazers}}</small>
+                <small>last update: {{qs.updated_at}}</small>
+              </h4>
+              <p>
+                <span><span class="glyphicon glyphicon-tag"></span>{{qs.language}}</span>
+                <span><span class="glyphicon glyphicon-user"></span><a href="{{qs.owner}}" target="_blank">{{qs.owner}}</a></span>
+              </p>
+              <p>{{qs.description}}</p>
+            </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <div class="text-center">
+            <br />
+            <p class="lead">Sorry, there are no results :(</p>
+            <h3><a href="/add">Perhaps it's time to add an image of your own?<a></h3>
+            <br />
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+</div>
+
+{% endblock %}
