@@ -233,10 +233,6 @@ def search(query = "all"):
     result = serach_engine.search(query)
     return render_template('search.html', quickstarts=result)
 
-@app.route('/about')
-def about():
-    return render_template(‘about.html')
-
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     if not g.user:
