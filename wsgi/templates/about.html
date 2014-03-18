@@ -1,76 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="row">
-	<div class="col-md-12 text-center">
-		<h2>About OpenShift Origin Index/h2>
-	</div>
+<header>
+<h1>About OpenShift Origin Index</h1>
+</header>
+
+<div class="shadow white-background padding-30">
+	<p>I was awakened early in the morning by some huge body pressing close to mine, and opening my eyes with a start I beheld my blessed old Woola snuggling close to me; the faithful brute had followed us across that trackless waste to share our fate, whatever it might be.  Putting my arms about his neck I pressed my cheek close to his, nor am I ashamed that I did it, nor of the tears that came to my eyes as I thought of his love for me.  Shortly after this Dejah Thoris and Sola awakened, and it was decided that we push on at once in an effort to gain the hills.</p>
+
+	<p>We had gone scarcely a mile when I noticed that my thoat was commencing to stumble and stagger in a most pitiful manner, although we had not attempted to force them out of a walk since about noon of the preceding day.  Suddenly he lurched wildly to one side and pitched violently to the ground.  Dejah Thoris and I were thrown clear of him and fell upon the soft moss with scarcely a jar; but the poor beast was in a pitiable condition, not even being able to rise, although relieved of our weight.  Sola told me that the coolness of the night, when it fell, together with the rest would doubtless revive him, and so I decided not to kill him, as was my first intention, as I had thought it cruel to leave him alone there to die of hunger and thirst.  Relieving him of his trappings, which I flung down beside him, we left the poor fellow to his fate, and pushed on with the one thoat as best we could.  Sola and I walked, making Dejah Thoris ride, much against her will.  In this way we had progressed to within about a mile of the hills we were endeavoring to reach when Dejah Thoris, from her point of vantage upon the thoat, cried out that she saw a great party of mounted men filing down from a pass in the hills several miles away.  Sola and I both looked in the direction she indicated, and there, plainly discernible, were several hundred mounted warriors.  They seemed to be headed in a southwesterly direction, which would take them away from us.</p>
+
+	<p>They doubtless were Thark warriors who had been sent out to capture us, and we breathed a great sigh of relief that they were traveling in the opposite direction.  Quickly lifting Dejah Thoris from the thoat, I commanded the animal to lie down and we three did the same, presenting as small an object as possible for fear of attracting the attention of the warriors toward us.</p>
+
+	<p>We could see them as they filed out of the pass, just for an instant, before they were lost to view behind a friendly ridge; to us a most providential ridge; since, had they been in view for any great length of time, they scarcely could have failed to discover us.  As what proved to be the last warrior came into view from the pass, he halted and, to our consternation, threw his small but powerful fieldglass to his eye and scanned the sea bottom in all directions.  Evidently he was a chieftain, for in certain marching formations among the green men a chieftain brings up the extreme rear of the column.  As his glass swung toward us our hearts stopped in our breasts, and I could feel the cold sweat start from every pore in my body.</p>
+
+	<p>Presently it swung full upon us and&mdash;stopped.  The tension on our nerves was near the breaking point, and I doubt if any of us breathed for the few moments he held us covered by his glass; and then he lowered it and we could see him shout a command to the warriors who had passed from our sight behind the ridge.  He did not wait for them to join him, however, instead he wheeled his thoat and came tearing madly in our direction.</p>
+
+	<p>There was but one slight chance and that we must take quickly.  Raising my strange Martian rifle to my shoulder I sighted and touched the button which controlled the trigger; there was a sharp explosion as the missile reached its goal, and the charging chieftain pitched backward from his flying mount.</p>
 </div>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-	{% if messages %}
-		{% for category, message in messages %}
-		<div class="container text-center flash-{{ category }}">{{ message }}</div>
-		{% endfor %}
-	{% endif %}
-{% endwith %}
-
-<div class="row">
-	<form class="form-horizontal col-md-10 col-md-offset-1 shadow white-background padding-30" action="" method="post">
-
-		<fieldset class="col-md-12">
-			<div class="row">
-				<div class="col-md-6 inverse right-block-helper">
-				
-					<h4>Use this form to add a new quickstart or cartridge to the index.</h4>
-					<p>Basic data about your project will be pulled in from Github such as language, data created, last update, # of watcher, stargazers and forks - which is used to rank your project activity. Each quickstart or cartridge to be added should be avaliable as its own Github repository.</p>
-					<p>For example, if the quickstart is located at http://github.com/myusername/myquickstartname, put 'myusername' in the first box and 'myquickstartname'in the second. For all quickstarts, we will need you to tell us which cartridges are required to create the application. For more information about how to create and upload a role, please refer to the <a href="">getting started documentation</a> for more information.</p>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<div class="btn-group">
-							<fieldset>
-								<label class="btn btn-primary">
-									<input type="radio" name="type" id="quickstart" value="quickstart" checked="checked"> Quickstart
-								</label>
-								<label class="btn btn-primary">
-									<input type="radio" name="type" id="cartridge" value="cartridge"> Cartridge
-								</label>
-							</fieldset>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="github-username">Github username/account</label>
-						<input type="text" name="github-username" class="form-control " id="github-username" placeholder="Github username/account" value="{{ g.user }}">
-						<p class="help-block">Enter the github username/account name which owns the repository containing the role.</p>
-					</div>
-
-					<div class="form-group">
-						<label for="github-repository">Github repository</label>
-						<input type="text" name="github-repository" class="form-control " id="github-repository" placeholder="Github repository">
-						<p class="help-block">Enter the name of the repository containing the quickstart or cartridge.</p>
-					</div>
-
-					<div class="form-group">
-						<label for="alternate-name">Alternate name</label>
-						<input type="text" name="alternate-name" class="form-control" id="alternate-name" placeholder="Alternate name">
-						<p class="help-block">(optional) An alternate name for the repository. If left blank, the repo name will be used.</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- TODO: update to combo -->
-			<div class="form-group" data-required="quickstart">
-				<label for="cartridges">Cartridges</label>
-				<input autocomplete="off" autocapitalize="off" spellcheck="false" type="text" name="cartridges" class="form-control" id="cartridges" placeholder="Cartridges" ui-select2="select2Options">
-				<p class="help-block">Enter the names of the cartridges required to deploy quickstart seperated by commas (for example: cron-14, mysql-5.1, phpmyadmin-3.4).</p>
-			</div>
-
-			<div class="form-group">
-				<button type="submit" class="btn btn-default pull-right">Add quickstart/cartridge</button>
-			</div>
-
-		</fieldset>
-	</form>
-</div>
 {% endblock %}

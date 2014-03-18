@@ -225,6 +225,10 @@ def index():
     qs = Quickstarts()
     return render_template('index.html', most_starred=qs.most_starred(), most_popular=qs.most_popular(), latest=qs.latest())
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/search', defaults = {'query': 'all'})
 def search(query = "all"):
     serach_engine = SearchEngine()
