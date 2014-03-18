@@ -3,3 +3,12 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+# install nodejs tools
+cd $OPENSHIFT_DATA_DIR
+npm --cache $PWD/.npm install uglify-js
+npm --cache $PWD/.npm install clean-css
+
+# build assets bundles
+cd $OPENSHIFT_REPO_DIR
+python manage.py funnel bundle_assets
