@@ -13,5 +13,7 @@ setup(name='OpenShift Origin Index',
          'PyGithub==1.23.0',
          'Babel==1.3',
          'python-dateutil==2.2',
+         'Flask-Funnel==0.1.10',
+         'Flask-Script==0.6.7',
       ],
      )
