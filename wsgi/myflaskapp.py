@@ -9,7 +9,9 @@ import dateutil.parser
 import datetime
 
 from flask import Flask, g, request, session, url_for, redirect, flash, render_template
-from flask.ext.github import GitHub as AuthGitHub
+from flask_github import GitHub as AuthGitHub
+from flask_funnel import Funnel
+
 from collections import OrderedDict
 from babel.dates import format_timedelta
 
@@ -18,12 +20,34 @@ class OOIndexError(Exception):
     '''
 
 app = Flask(__name__)
-app.debug = True
+app.debug = int(os.environ.get('DEBUG', '0')) != 0
+
+app.config['UGLIFY_BIN'] = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', ''), 'node_modules/uglify-js/bin/uglifyjs')
+app.config['CLEANCSS_BIN'] = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', ''), 'node_modules/clean-css/bin/cleancss')
+
+app.config['CSS_BUNDLES'] = {
+    'bundle-css': (
+        'css/bootstrap.css',
+        'css/bootstrap-theme.css',
+        'css/icons.css',
+        'css/normalize.css',
+        'css/oo-index.css',
+    ),
+}
+
+app.config['JS_BUNDLES'] = {
+    'bundle-js': (
+        'js/jquery-2.1.0.js',
+        'js/bootstrap.js',
+    ),
+}
+
+Funnel(app)
 
 try:
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me')
     app.config['GITHUB_CLIENT_ID'] = os.environ['GITHUB_CLIENT_ID']
     app.config['GITHUB_CLIENT_SECRET'] = os.environ['GITHUB_CLIENT_SECRET']
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me')
 except KeyError, ex:
     app.config['GITHUB_CLIENT_ID'] = 'FAKE-CLIENT-ID'
     app.config['GITHUB_CLIENT_SECRET'] = 'FAKE-CLIENT-SECRET'
@@ -420,4 +444,4 @@ def send_pull_request(form_data):
 
 ##########################
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=app.debug)
