@@ -66,6 +66,7 @@ label { color: #666; }
 
 #search_form .form-control {
   width: 94%;
+  height: auto;
 }
 
 
