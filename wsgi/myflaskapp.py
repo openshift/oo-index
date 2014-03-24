@@ -255,6 +255,10 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
 @app.route('/search', defaults = {'query': 'all'})
 def search(query = "all"):
     serach_engine = SearchEngine()
