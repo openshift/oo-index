@@ -27,10 +27,12 @@ app.config['CLEANCSS_BIN'] = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', '
 
 app.config['CSS_BUNDLES'] = {
     'bundle-css': (
+        'css/normalize.css',
         'css/bootstrap.css',
         'css/bootstrap-theme.css',
+        'css/select2.css',
+        'css/select2-bootstrap.css',
         'css/icons.css',
-        'css/normalize.css',
         'css/oo-index.css',
     ),
 }
@@ -248,6 +250,14 @@ def logout():
 def index():
     qs = Quickstarts()
     return render_template('index.html', most_starred=qs.most_starred(), most_popular=qs.most_popular(), latest=qs.latest())
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
 
 @app.route('/search', defaults = {'query': 'all'})
 def search(query = "all"):
