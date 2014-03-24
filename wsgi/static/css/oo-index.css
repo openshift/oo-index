@@ -29,20 +29,39 @@ h2 { color: #666; margin-bottom: 20px; }
 
 /* Box list */
 
-.box-list .background { padding: 5px 15px; }
-.box-list:hover .background { background-color: rgba(255,255,255,0.90); }
+/* .box-list .background { padding: 5px 15px; } */
+/* .box-list:hover .background { background-color: rgba(255,255,255,0.90); } */
 
-.box-list ul { list-style: none; min-height: 200px; padding: 0; }
-.box-list ul li { background: rgba(255,255,255,0.02); color: #666; font-size: 11px; height: 25px; line-height: 20px; margin: 2px 0; overflow: hidden; padding: 3px 0; }
+/* .box-list ul { list-style: none; min-height: 200px; padding: 0; } */
+/* .box-list ul li { background: rgba(255,255,255,0.02); color: #666; font-size: 11px; height: 25px; line-height: 20px; margin: 2px 0; overflow: hidden; padding: 3px 0; } */
 
-.box-list ul li:first-child { background: rgba(77,167,79,0.07); font-size: 13px; font-weight: bold; }
-.box-list ul li:nth-child(2),
-.box-list ul li:nth-child(3) { background: rgba(255,255,255,0.04); font-size: 13px; }
+/* .box-list ul li:first-child { background: rgba(77,167,79,0.07); font-size: 13px; font-weight: bold; } */
+/* .box-list ul li:nth-child(2), */
+/* .box-list ul li:nth-child(3) { background: rgba(255,255,255,0.04); font-size: 13px; } */
 
-.box-list ul li:hover { margin-left: -5px; background: rgba(120,120,120,0.1); }
+/* .box-list ul li:hover { margin-left: -5px; background: rgba(120,120,120,0.1); } */
 
-.list { padding: 15px; }
+/* .list { padding: 15px; } */
 
+.box-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.box-list li > a {
+  display: block;
+  margin: 10px 0;
+  padding: 1px 10px 10px 10px;
+}
+.box-list li > a:hover {
+  background: white;
+  text-decoration: none;
+}
+
+.box-list li > a .meta {
+  font-size: 90%;
+  color: #666;
+}
 
 /* Header */
 .navbar { background: #111; border-top: 3px solid #ef2e32; font-family: Overpass,"Helvetica Neue",Helvetica,Arial,sans-serif; min-height: 40px; }

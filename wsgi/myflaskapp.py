@@ -85,6 +85,24 @@ def owner_display(quickstart):
         link = quickstart['owner'].split('/')[-1]
     return '<a href="{qs[owner]}">{link}</a>'.format(qs=quickstart, link=link)
 
+@app.template_filter('owner_name')
+def owner_name(quickstart):
+    '''Given a 'quickstart', return just the owner name
+    '''
+    if quickstart.get('owner_name'):
+        return quickstart['owner_name']
+    else:
+        return quickstart['owner'].split('/')[-1]
+
+@app.template_filter('git_repo_url')
+def git_repo_url(quickstart):
+    '''Given a 'quickstart', return the github repo url
+    '''
+    if quickstart.get('git_repo_url'):
+        return quickstart['git_repo_url']
+    else:
+        return quickstart['owner'] + '/' + quickstart['name']
+
 @app.template_filter('short_name')
 def short_name(name):
     if name.lower() == 'quickstart':
@@ -134,7 +152,7 @@ class Quickstarts:
         return sorted(self.data, key=lambda x: int(x['stargazers']), reverse=True)[:count]
 
     def most_popular(self, count=10):
-        return sorted(self.data, key=lambda x: int(x['watchers']), reverse=True)[:count]
+        return sorted(self.data, key=lambda x: int(x['watchers'] + x['stargazers'] + x['forks']), reverse=True)[:count]
 
     def latest(self, count=10):
         return sorted(self.data, key=lambda x: x['submitted_at'], reverse=True)[:count]
@@ -249,7 +267,7 @@ def logout():
 @app.route('/')
 def index():
     qs = Quickstarts()
-    return render_template('index.html', most_starred=qs.most_starred(), most_popular=qs.most_popular(), latest=qs.latest())
+    return render_template('index.html', most_starred=qs.most_starred(5), most_popular=qs.most_popular(5), latest=qs.latest(5))
 
 @app.route('/about')
 def about():
