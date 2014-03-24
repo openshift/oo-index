@@ -31,6 +31,8 @@ app.config['CSS_BUNDLES'] = {
         'css/bootstrap-theme.css',
         'css/icons.css',
         'css/normalize.css',
+        'css/select2.css',
+        'css/select2-bootstrap.css',
         'css/oo-index.css',
     ),
 }
