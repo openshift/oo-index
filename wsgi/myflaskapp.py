@@ -27,12 +27,12 @@ app.config['CLEANCSS_BIN'] = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR', '
 
 app.config['CSS_BUNDLES'] = {
     'bundle-css': (
+        'css/normalize.css',
         'css/bootstrap.css',
         'css/bootstrap-theme.css',
-        'css/icons.css',
-        'css/normalize.css',
         'css/select2.css',
         'css/select2-bootstrap.css',
+        'css/icons.css',
         'css/oo-index.css',
     ),
 }
