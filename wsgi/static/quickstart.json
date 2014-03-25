@@ -2622,7 +2622,7 @@
       "stargazers": 9, 
       "owner_type": "User", 
       "alternate_name": "Burning Tyger Moodle", 
-      "cartridges": "php-5.3, cron-1.4, mysql-5.1, phpmyadmin-4", 
+      "cartridges": ["php-5.3", "cron-1.4", "mysql-5.1", "phpmyadmin-4"], 
       "type": "quickstart"
    },
    {   
@@ -2640,7 +2640,7 @@
       "stargazers": 17, 
       "owner_type": "Organization", 
       "alternate_name": "Joomla Example", 
-      "cartridges": "php-5.3, mysql-5.1", 
+      "cartridges": ["php-5.3", "mysql-5.1"], 
       "type": "quickstart"
    },
    {
@@ -2659,7 +2659,7 @@
       "stargazers": 0, 
       "owner_type": "User", 
       "alternate_name": "wordpress-exemplo", 
-      "cartridges": [], 
+      "cartridges": ["php-5.4","mysql-5.1"], 
       "type": "quickstart"
    }
 ]
