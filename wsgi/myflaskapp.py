@@ -222,7 +222,7 @@ class SearchEngine:
         found_quickstarts = sorted(found_quickstarts, key=lambda quickstart: quickstart[0], reverse=True)
         result = [quickstart[1] for quickstart in found_quickstarts]
         for qstart in result:
-            if qstart['type'] == 'QuickStart':
+            if qstart['type'].lower() == 'quickstart':
                 cartstring = ''
                 for cart in qstart['cartridges']:
                     cartstring += "&cartridges[]="+cart
