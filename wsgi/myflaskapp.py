@@ -402,12 +402,12 @@ def send_pull_request(form_data):
     qs_u = form_data['github-username']
     qs_r = form_data['github-repository']
     qs_n = form_data['alternate-name'] or qs_r
-    qs_c = form_data['cartridges'] or []
+    qs_c = form_data['cartridges'] or ''
     qs_t = form_data['type'] or []
     try:
         qs = _read_quickstart_repo(qs_u, qs_r)
         qs['alternate_name'] = qs_n
-        qs['cartridges'] = qs_c
+        qs['cartridges'] = qs_c.replace(' ','').split(',')
         qs['type'] = qs_t
         qs['submitted_at'] = datetime.datetime.isoformat(datetime.datetime.utcnow())
     except PyGitHub.UnknownObjectException:
