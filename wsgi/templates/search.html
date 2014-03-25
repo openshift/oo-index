@@ -28,6 +28,9 @@
               <p>
                 <span><span class="glyphicon glyphicon-tag"></span>{{qs.language}}</span>
                 <span><span class="glyphicon glyphicon-user"></span><a href="{{qs.owner}}" target="_blank">{{qs.owner}}</a></span>
+                {% if qs.launch_url %}
+                  <a class='btn btn-default btn-primary btn-sm' style='border-radius:5px;' href='{{qs.launch_url}}'>Launch <span class="glyphicon glyphicon-new-window"></span></a>
+                {% endif %}
               </p>
               <p>{{qs.description}}</p>
             </li>

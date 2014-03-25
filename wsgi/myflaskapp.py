@@ -221,8 +221,12 @@ class SearchEngine:
 
         found_quickstarts = sorted(found_quickstarts, key=lambda quickstart: quickstart[0], reverse=True)
         result = [quickstart[1] for quickstart in found_quickstarts]
-
-
+        for qstart in result:
+            if qstart['type'] == 'QuickStart':
+                cartstring = ''
+                for cart in qstart['cartridges']:
+                    cartstring += "&cartridges[]="+cart
+                qstart['launch_url'] = "https://openshift.redhat.com/app/console/application_types/custom?name="+qstart['default_app_name']+"&initial_git_url="+qstart['git_repo_url']+cartstring;
         return result
 
 
