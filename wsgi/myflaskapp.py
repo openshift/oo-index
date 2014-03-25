@@ -304,7 +304,7 @@ def add():
         except KeyError, ex:
             flash('Missing field: %s' % ex, 'error')
             return render_template('add.html') #, **form_data)
-        form_data['alternate-name'] = request.form.get('alternate-name')
+        form_data['app-name'] = request.form.get('app-name')
         form_data['cartridges'] = request.form.get('cartridges')
 
         try:
@@ -401,12 +401,15 @@ def send_pull_request(form_data):
     # read metadata of new quickstart repo
     qs_u = form_data['github-username']
     qs_r = form_data['github-repository']
-    qs_n = form_data['alternate-name'] or qs_r
+    qs_n = form_data['app-name'] or qs_r
     qs_c = form_data['cartridges'] or ''
     qs_t = form_data['type'] or []
     try:
         qs = _read_quickstart_repo(qs_u, qs_r)
-        qs['alternate_name'] = qs_n
+        if qs_n and len(qs_n) > 0 :
+            qs['default_app_name'] = qs_n.replace('-','').replace(' ','')
+        else:
+            qs['default_app_name'] = qs_r.replace('-','').replace(' ','')
         qs['cartridges'] = qs_c.replace(' ','').split(',')
         qs['git_repo_url'] = "https://github.com/"+qs_u+"/"+qs_r+".git"
         qs['type'] = qs_t

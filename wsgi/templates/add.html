@@ -51,9 +51,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="alternate-name">Alternate name</label>
-						<input type="text" name="alternate-name" class="form-control" id="alternate-name" placeholder="Alternate name">
-						<p class="help-block">(optional) An alternate name for the repository. If left blank, the repo name will be used.</p>
+						<label for="app-name">Default App Name</label>
+						<input type="text" name="app-name" class="form-control" id="app-name" placeholder="myApp">
+						<p class="help-block">(optional) A short name for the hosted application. No hyphens or spaces allowed.  If left blank, the repo name will be used.</p>
 					</div>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 			<div class="form-group" data-required="quickstart">
 				<label for="cartridges">Cartridges</label>
 				<input autocomplete="off" autocapitalize="off" spellcheck="false" type="text" name="cartridges" class="form-control" id="cartridges" placeholder="Cartridges" ui-select2="select2Options">
-				<p class="help-block">Enter the names of the cartridges required to deploy quickstart seperated by commas (for example: cron-14, mysql-5.1, phpmyadmin-3.4).</p>
+				<p class="help-block">Enter a comma-separated list detailing each of your application's cartridge dependencies (for example: php-5.4, cron-14, mysql-5.1, phpmyadmin-3.4).</p>
 			</div>
 
 			<div class="form-group">
