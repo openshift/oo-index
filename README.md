@@ -53,7 +53,7 @@ And should comply with the following data format guidelines:
 * **name** - a human-readable name for this project, service, or application (required)
 * **default_app_name** - a short name suggestion, for use in the hosted application url. No hyphens, spaces, or other special characters allowed (a-zA-Z0-9 only, optional) 
 * **git_repo_url** - a URL that points to the project's source code (required)
-* **cartridges** - csv list of strings, starting with the base cartridge type, and continuing with any additional cartridge-based dependencies (required for quickstart applications)
+* **cartridges** - an array of cartridge names (strings), starting with the base web runtime cartridge, and continuing with any additional cartridge-based dependencies (this content is required for all quickstart applications)
 * **website** - URL pointing to a project homepage (optional)
 * **demo_url** - A link to a live demo (optional)
 * **version** - The release version for this project, usually a numeric string (optional)
