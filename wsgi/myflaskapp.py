@@ -408,6 +408,7 @@ def send_pull_request(form_data):
         qs = _read_quickstart_repo(qs_u, qs_r)
         qs['alternate_name'] = qs_n
         qs['cartridges'] = qs_c.replace(' ','').split(',')
+        qs['git_repo_url'] = "https://github.com/"+qs_u+"/"+qs_r+".git"
         qs['type'] = qs_t
         qs['submitted_at'] = datetime.datetime.isoformat(datetime.datetime.utcnow())
     except PyGitHub.UnknownObjectException:
