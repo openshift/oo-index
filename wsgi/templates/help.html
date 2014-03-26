@@ -1,21 +1,39 @@
 {% extends "layout.html" %}
 {% block content %}
 <header>
-<h1>OpenShift Origin Index Help</h1>
+<h1>Help</h1>
 </header>
 
 <div class="shadow white-background padding-30">
+
 <h2>Accounts</h2>
+
 <p>If you want to use the OpenShift Origin Index, you can browse and download quickstarts and cartridges without an OpenShift or GitHub account, but if you want to add items to the Index, 
 you'll need a GitHub account AND if you'd like to launch an quickstart or cartridge on OpenShift Online, you'll need an account there</p>
-<h2>Searching</h2>
-<p>You can search all the quickstarts and cartridges that have been submitted and have publicly active github repositories. If the github repository isn't publicly active then it will not show up in the search results.</p>
-<h2>Launching</h2>
+
 <h2>Adding</h2>
-<p>Basic data about your project will be pulled in from Github such as language, data created, last update, # of watcher, stargazers and forks - which is used to rank your project activity. Each quickstart or cartridge to be added should be avaliable as its own Github repository.
-For example, if the quickstart is located at http://github.com/myusername/myquickstartname, put 'myusername' in the first box and 'myquickstartname'in the second. For all quickstarts, we will need you to tell us which cartridges are required to create the application. For more information about how to create a quickstart or a cartridge, please refer to the getting started documentation for more information.</p>
+
+<p>You must be logged into your GitHub account to submit a new item (quick start or cartridge) to the index, as the form generates a Pull Request against the /openshift/oo-index repository that notifies the index administrators that a new item has been submitted and needs to be merged. The Index admin will review the Pull Request to ensure it is not a duplicate and that all the requested information has been submitted properly.</p>
+<p>Basic data about your project will be pulled in from Github such as language, data created, last update, # of watchers, stargazers and forks - which is used to rank your project activity. Each quickstart or cartridge to be added should be available as its own public Github repository.</p>
+<p>For example, if the quickstart is located at http://github.com/myusername/myquickstartname, put 'myusername' in the first box and 'myquickstartname'in the second. For all quickstarts, we will need you to tell us which cartridges are required to create the application. For more information about how to create a quickstart or a cartridge, please refer to the getting started documentation for more information.</p>
+<p>You can check the status of your submission(s) in the /openshift/oo-index pull request queue and post any issues to the /openshift/oo-index issue list</p>
+
+<h2>Searching</h2>
+
+<p>You can search all the quickstarts and cartridges that have been submitted and have publicly active github repositories. If the github repository isn't publicly active then it will not show up in the search results.</p>
+
+<h2>Launching</h2>
+
+<p>The Index is meant primarily as a place of discovery. If you have an account with OpenShift Online, you can click on the “Launch” button to go directly to the OpenShift Online Web Console where the required fields will be pre-populated so you can easily deploy your own instance of the application.  You can also deploy your own instance of the Index and point it to the cloud hosting provider of your choice or on your own on-premise cloud by setting the default launch URL using the OPENSHIFT_LAUNCH_URL env variable. You can set env variable in on the command line when you create the app, or they can set it later (“rhc env set”). The next release of the oo-index will include the ability to select alternative OpenShift-compatible hosting providers dynamically. 
+
 <h2>Calculating Popularity</h2>
-<h2>Recently Added</h2>
+
+On the main home page, you will find a ranking of items in the Index by popularity. This statistic is calculated based on the sum of the following GitHub statistics (Stargazers, Watched, Forked). 
+
+
 <h2>FeedBack</h2></div>
+
+<p>The Index itself does not collect statistics or gather comments on the items (QuickStarts or Cartridges)  that it lists. Instead, you should go directly to the repository show you appreciation directly in GitHub and post any comments or issues into the repository associated with the quick start or cartridges. This will ensure the the project’s creator and maintainers are promptly notified.</p>
+<p>If you have feedback on the Index itself, it is an Open Source Community project, so feel free to submit an issue to project here. If you have a patch, make a pull request as we’d happy to have your contribution!</p>
 
 {% endblock %}
