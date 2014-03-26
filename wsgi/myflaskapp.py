@@ -143,7 +143,12 @@ class Quickstarts:
             raise
 
         try:
-            self.data = Quickstarts.cached = ast.literal_eval(content)
+            qstarts = ast.literal_eval(content)
+            for qstart in qstarts:
+                if qstart['type'].lower() == 'quickstart' and qstart.has_key('cartridges') and not qstart.has_key('launch_url'):
+                    qstart['launch_url'] = make_launch_url(qstart['git_repo_url'], qstart['cartridges'], qstart['default_app_name'])
+            self.data = Quickstarts.cached = qstarts
+            
         except Exception, ex:
             print >>sys.stderr, "Error parsing file %s: %s" % (self.path, ex)
             raise
@@ -221,12 +226,12 @@ class SearchEngine:
 
         found_quickstarts = sorted(found_quickstarts, key=lambda quickstart: quickstart[0], reverse=True)
         result = [quickstart[1] for quickstart in found_quickstarts]
-        for qstart in result:
-            if qstart['type'].lower() == 'quickstart':
-                cartstring = ''
-                for cart in qstart['cartridges']:
-                    cartstring += "&cartridges[]="+cart
-                qstart['launch_url'] = "https://openshift.redhat.com/app/console/application_types/custom?name="+qstart['default_app_name']+"&initial_git_url="+qstart['git_repo_url']+cartstring;
+        #for qstart in result:
+        #//    //if qstart['type'].lower() == 'quickstart' and not qstart.has_key('launch_url'):
+        #//    //    cartstring = ''
+        #//    //    for cart in qstart['cartridges']:
+        #//    //        cartstring += "&cartridges[]="+cart
+        #//    //    qstart['launch_url'] = "https://openshift.redhat.com/app/console/application_types/custom?name="+qstart['default_app_name']+cartstring+"&initial_git_url="+qstart['git_repo_url'];
         return result
 
 
@@ -385,6 +390,14 @@ def _filter_repo_fields(repo):
     r['owner_type'] = repo.owner.type
     r['owner'] = repo.owner.html_url
     return r
+
+def make_launch_url(repo_url, cartridges, app_name):
+   cartstring = ''
+   if len(cartridges) > 0:
+       for cart in cartridges:
+           cartstring += "&cartridges[]="+cart
+   url = "https://openshift.redhat.com/app/console/application_types/custom?name="+app_name+cartstring+"&initial_git_url="+repo_url
+   return url
 
 def _get_repo_for(username, reponame, token=None):
     if token:
