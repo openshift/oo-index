@@ -226,12 +226,6 @@ class SearchEngine:
 
         found_quickstarts = sorted(found_quickstarts, key=lambda quickstart: quickstart[0], reverse=True)
         result = [quickstart[1] for quickstart in found_quickstarts]
-        #for qstart in result:
-        #//    //if qstart['type'].lower() == 'quickstart' and not qstart.has_key('launch_url'):
-        #//    //    cartstring = ''
-        #//    //    for cart in qstart['cartridges']:
-        #//    //        cartstring += "&cartridges[]="+cart
-        #//    //    qstart['launch_url'] = "https://openshift.redhat.com/app/console/application_types/custom?name="+qstart['default_app_name']+cartstring+"&initial_git_url="+qstart['git_repo_url'];
         return result
 
 
@@ -394,9 +388,10 @@ def _filter_repo_fields(repo):
 def make_launch_url(repo_url, cartridges, app_name):
    cartstring = ''
    if len(cartridges) > 0:
+       host = os.environ.get('OPENSHIFT_LAUNCH_URL', "https://openshift.redhat.com" )
        for cart in cartridges:
            cartstring += "&cartridges[]="+cart
-   url = "https://openshift.redhat.com/app/console/application_types/custom?name="+app_name+cartstring+"&initial_git_url="+repo_url
+   url = host+"/app/console/application_types/custom?name="+app_name+cartstring+"&initial_git_url="+repo_url
    return url
 
 def _get_repo_for(username, reponame, token=None):
