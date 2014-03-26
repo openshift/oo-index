@@ -46,6 +46,9 @@
 					<a href="{{qs|git_repo_url}}">
 						<h4 class="name">{{ qs.name }}</h4>
 						<div class="meta">{{ qs.type }} by {{ qs|owner_name|safe }}</div>
+						{% if qs.launch_url %}
+                                                <div style="padding-left:20px;"><a class='btn btn-default btn-primary btn-sm' style='border-radius:5px;' href='{{qs.launch_url}}'>Launch <span class="glyphicon glyphicon-new-window"></span></a></div>
+                                                {% endif %}
 					</a>
 				</li>
 			{% endfor %}
@@ -62,6 +65,9 @@
 					<a href="{{qs|git_repo_url}}">
 						<h4 class="name">{{ qs.name }}</h4>
 						<div class="meta">{{ qs.type }} by {{ qs|owner_name|safe }}</div>
+						{% if qs.launch_url %}
+                                                <div style='padding-left:20px;'><a class='btn btn-default btn-primary btn-sm' style='border-radius:5px;' href='{{qs.launch_url}}'>Launch <span class="glyphicon glyphicon-new-window"></span></a></div>
+                                                {% endif %}
 					</a>
 				</li>
 			{% endfor %}
