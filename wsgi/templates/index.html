@@ -1,32 +1,24 @@
 {% extends "layout.html" %}
+{% set body_class = "home" %}
 {% block content %}
-	<div class="row">
-		<div class="col-xs-12">
-		        <!--
-			<h1>About OpenShift Origin Index</h1>
-			-->
-			<p>The OpenShift Origin index is the place to find and browse OpenShift Community-sourced QuickStarts and Cartridges.</p>
-		</div>
-	</div>
-
-	<hr>
-
-	<div class="row header">
-		<div class="col-xs-6">
+	<div class="row sub-header">
+		<div class="col-xs-12 col-md-6 col-md-offset-3">
+			<p>
+				Find, browse, and share OpenShift cartridges and quickstarts.
+			</p>
 			{% include 'partials/search_form.html' %}
 		</div>
-		<div class="col-xs-6">
-{% if g.user %}
-			<a class="btn btn-default pull-right" href="/add">+ Add quickstart or cartridge</a>
-{% else %}
-			<a class="btn btn-default pull-right" href="/login">+ Login to add your quickstarts</a>
-{% endif %}
-		</div>
 	</div>
 
+<!-- {% if g.user %} -->
+<!-- 			<a class="btn btn-default pull-right" href="/add">+ Add quickstart or cartridge</a> -->
+<!-- {% else %} -->
+<!-- 			<a class="btn btn-default pull-right" href="/login">+ Login to add your quickstarts</a> -->
+<!-- {% endif %} -->
+
 	<!-- TODO:
-	       - fix columns width
-	       - add button "deploy" (glyphicon-cloud_upload)
+		   - fix columns width
+		   - add button "deploy" (glyphicon-cloud_upload)
 	-->
 	<div class="row list">
 		<div class="popular col-md-5 col-md-offset-1 box-list">
@@ -39,10 +31,14 @@
 					<a href="{{qs|git_repo_url}}">
 						<h4 class="name">{{ qs.name }}</h4>
 						<div class="meta">{{ qs.type }} by {{ qs|owner_name|safe }}</div>
-						{% if qs.launch_url %}
-                                                <div style="padding-left:20px;"><a class='btn btn-default btn-primary btn-sm' style='border-radius:5px;' href='{{qs.launch_url}}'>Launch <span class="glyphicon glyphicon-new-window"></span></a></div>
-                                                {% endif %}
 					</a>
+					{% if qs.launch_url %}
+						<div class="launch">
+							<a title="Launch {{qs.name}}" href='{{qs.launch_url}}'>
+								<span class="icon icon-rocket"></span>
+							</a>
+						</div>
+					{% endif %}
 				</li>
 			{% endfor %}
 			</ul>
@@ -58,10 +54,14 @@
 					<a href="{{qs|git_repo_url}}">
 						<h4 class="name">{{ qs.name }}</h4>
 						<div class="meta">{{ qs.type }} by {{ qs|owner_name|safe }}</div>
-						{% if qs.launch_url %}
-                                                <div style='padding-left:20px;'><a class='btn btn-default btn-primary btn-sm' style='border-radius:5px;' href='{{qs.launch_url}}'>Launch <span class="glyphicon glyphicon-new-window"></span></a></div>
-                                                {% endif %}
 					</a>
+					{% if qs.launch_url %}
+						<div class="launch">
+							<a title="Launch {{qs.name}}" href='{{qs.launch_url}}'>
+								 <span class="icon icon-rocket"></span>
+							</a>
+						</div>
+					{% endif %}
 				</li>
 			{% endfor %}
 			</ul>
