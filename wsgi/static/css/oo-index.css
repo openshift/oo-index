@@ -1,4 +1,7 @@
 /* .nav, .pagination, .carousel a { cursor: pointer; } */
+html {
+  background: #333;
+}
 body { 
   color: #404040; 
   font-family: "Open Sans", "Helvetica Neue", Helvetica, "Liberation Sans", Arial,sans-serif; 
@@ -13,7 +16,7 @@ body > div.container-fluid {
 }
 
 h2 { 
-  color: #404040; 
+  color: #666; 
   margin-bottom: 20px; 
 }
 
@@ -70,9 +73,24 @@ h2 {
   text-decoration: none;
 }
 
+.box-list li > a h3 {
+  margin-top: 10px;
+}
+
+.box-list li > a .description {
+  color: #404040;
+}
+
 .box-list li > a .meta {
   font-size: 90%;
   color: #666;
+}
+
+.box-list li > a .meta .glyphicon {
+  margin: 0 3px 0 10px;
+}
+.box-list li > a .meta .glyphicon:first-child {
+  margin: 0 3px 0 0;
 }
 
 .box-list li .launch a {
@@ -106,7 +124,15 @@ h2 {
   right: 9px;
   transition: .3s background-color;
 }
-  
+.box-list li:hover .launch a:active,
+.box-list li .launch a:active {
+  outline: none;
+  text-decoration: none;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.25);
+  top: 12px;
+  right: 8px;
+  text-shadow: none;
+}
 
 /* Header */
 .navbar { 
@@ -255,3 +281,13 @@ footer .social a {
 
 /* --- /Search page --- */
 
+
+/* --- Content pages --- */
+body.content > div.container-fluid {
+  background: white;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+body.content > div.container-fluid  header {
+  border-bottom: 1px solid #ccc;
+}

@@ -1,10 +1,9 @@
 {% extends "layout.html" %}
+{% set body_class = "content" %}
 {% block content %}
 <header>
 <h1>Help</h1>
 </header>
-
-<div class="shadow white-background padding-30">
 
 <h2>Accounts</h2>
 
@@ -31,9 +30,8 @@ you'll need a GitHub account AND if you'd like to launch an quickstart or cartri
 On the main home page, you will find a ranking of items in the Index by popularity. This statistic is calculated based on the sum of the following GitHub statistics (Stargazers, Watched, Forked). 
 
 
-<h2>FeedBack</h2></div>
+<h2>FeedBack</h2>
 
 <p>The Index itself does not collect statistics or gather comments on the items (QuickStarts or Cartridges)  that it lists. Instead, you should go directly to the repository show you appreciation directly in GitHub and post any comments or issues into the repository associated with the quick start or cartridges. This will ensure the the project’s creator and maintainers are promptly notified.</p>
 <p>If you have feedback on the Index itself, it is an Open Source Community project, so feel free to submit an issue to project here. If you have a patch, make a pull request as we’d happy to have your contribution!</p>
-
 {% endblock %}
