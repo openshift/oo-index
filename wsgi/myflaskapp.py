@@ -286,7 +286,7 @@ def search(query = "all"):
 
     query = request.args.get('query', "")
     result = serach_engine.search(query)
-    return render_template('search.html', quickstarts=result)
+    return render_template('search.html', quickstarts=result, query=query)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():

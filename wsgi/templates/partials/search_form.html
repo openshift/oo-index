@@ -1,4 +1,4 @@
 <form id="search_form" class="form-inline row ng-pristine ng-valid" role="form" method="get" action="/search">
-    <input type="search" class="form-control" placeholder="Search the index" required="" name="query">
+    <input type="search" class="form-control" placeholder="Search the index" required="" name="query" {% if query %} value={{query}} {% endif %}>
     <button type="submit" class="btn btn-default">search</button>
 </form>
