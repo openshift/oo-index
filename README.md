@@ -26,6 +26,9 @@ You can [spin up your own hosted instance of this project on OpenShift Online](h
     git pull -s recursive -X theirs upstream master
     git push
 
+You can also provide your openshift launch url so that it takes directly to the openshift origin host of your choice:
+    rhc app create index python-2.7 GITHUB_CLIENT_ID=[github-client-id] GITHUB_CLIENT_SECRET=[github-client-secret] OO_INDEX_GITHUB_REPONAME=index OO_INDEX_GITHUB_USERNAME=[your-github-username] OPENSHIFT_LAUNCH_URL=[your-openshift-launchURL]
+
 ### Local Development
 
 Simply start a local web server with your Application credentials:
