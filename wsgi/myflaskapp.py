@@ -356,7 +356,7 @@ def _read_github_file(username, reponame, filename):
     head = repo.get_commit('HEAD')
     tree = repo.get_git_tree(head.sha, recursive=True)
     blob = _get_tree_element(repo, tree, filename)
-    content = requests.get(blob.url, headers={'Accept': 'application/vnd.github.v3.raw+json'}).json()
+    content = requests.get(blob.url, headers={'Accept': 'application/vnd.github.v3.raw+json'}).json(object_pairs_hook=OrderedDict)
 
     return repo, head, tree, content
 
