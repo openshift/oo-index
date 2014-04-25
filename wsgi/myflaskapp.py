@@ -470,7 +470,7 @@ def send_pull_request(form_data):
     repo, head, tree, quickstart = _read_github_file(u, r, q)
 
     # add quickstart to quickstart.json
-    quickstart.append(qs)
+    quickstart.insert(0,qs)
 
     # create new blob with updated quickstart.json
     print "Creating blob...",; sys.stdout.flush()
