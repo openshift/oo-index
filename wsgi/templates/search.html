@@ -1,38 +1,43 @@
 {% extends "layout.html" %}
+{% set body_class = "search" %}
 {% block content %}
 
-<div id="search_page">
-
-  <div class="row header">
-    <div class="col-xs-6">
-      <h1>Search for quickstarts</h1>
-      <br />
-      <!-- TODO: use search form as partial -->
-      {% include 'partials/search_form.html' %}
+<div class="row sub-header">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <p>
+            Find, browse, and share OpenShift cartridges and quickstarts.
+        </p>
+        {% include 'partials/search_form.html' %}
     </div>
-  </div>
+</div>
 
- <div class="row list">
-    <div class="col-xs-12  no-padding-left">
-      <div class="background shadow">
-        {% if quickstarts %}
-        <h2 class="text-left">Result list</h2>
+<div class="row box-list">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+       {% if quickstarts %}
+        <h2>Results for {{query}}</h2>
         <ul>
           {% for qs in quickstarts %}
             <li>
-              <h4 class="package_title"><a href="{{qs.git_repo_url}}">{{qs.name}}</a>
-                <small><span class="glyphicon glyphicon-eye-open"></span> {{qs.watchers}}</small>
-                <small><span class="glyphicon glyphicon-star"></span> {{qs.stargazers}}</small>
-                <small>last update: {{qs.updated_at}}</small>
-              </h4>
-              <p>
-                <span><span class="glyphicon glyphicon-tag"></span>{{qs.language}}</span>
-                <span><span class="glyphicon glyphicon-user"></span><a href="{{qs.owner}}" target="_blank">{{qs.owner}}</a></span>
-                {% if qs.launch_url %}
-                  <a class='btn btn-default btn-primary btn-sm' style='border-radius:5px;' href='{{qs.launch_url}}'>Launch <span class="glyphicon glyphicon-new-window"></span></a>
-                {% endif %}
-              </p>
-              <p>{{qs.description}}</p>
+              <a href="{{qs.git_repo_url}}">
+                <h4 class="package_title">
+                    {{qs.name}}
+                </h4>
+                <p class="description">{{qs.description}}</p>
+                <div class="meta">
+                    <span class="glyphicon glyphicon-tag"></span>{{qs.language}}
+                    <span class="glyphicon glyphicon-user"></span>{{qs.owner}}
+                    <span class="glyphicon glyphicon-eye-open"></span>{{qs.watchers}}
+                    <span class="glyphicon glyphicon-star"></span>{{qs.stargazers}}
+                    <span class="glyphicon glyphicon-time"></span>last update: {{qs.updated_at}}
+                </div>
+              </a>
+              {% if qs.launch_url %}
+                <div class="launch">
+                    <a title="Launch {{qs.name}}" href='{{qs.launch_url}}'>
+                        <span class="icon icon-rocket"></span>
+                    </a>
+                </div>
+              {% endif %}
             </li>
           {% endfor %}
         </ul>
@@ -41,12 +46,8 @@
             <br />
             <p class="lead">Sorry, there are no results :(</p>
             <h3><a href="/add">Perhaps it's time to add an image of your own?<a></h3>
-            <br />
           </div>
         {% endif %}
       </div>
     </div>
-  </div>
-</div>
-
 {% endblock %}

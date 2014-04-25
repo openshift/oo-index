@@ -1,19 +1,41 @@
-.nav, .pagination, .carousel a { cursor: pointer; }
+/* .nav, .pagination, .carousel a { cursor: pointer; } */
+html {
+  background: #333;
+}
+body { 
+  color: #404040; 
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, "Liberation Sans", Arial,sans-serif; 
+  position: relative; 
+}
 
-body { color: #666; font-family: "Open Sans", "Helvetica Neue", Helvetica, "Liberation Sans", Arial,sans-serif; padding-top: 40px; position: relative; }
+body > div.container-fluid { 
+  background: #eee; 
+  padding-bottom: 100px; 
+  position: relative; 
+  width: 100%; 
+}
 
-body > .container { background: #f8f9f4; border-bottom: 10px solid #fff; margin-bottom: 100px; padding-bottom: 100px; position: relative; z-index: 2; width: 100%; }
-
-h2 { color: #666; margin-bottom: 20px; }
+h2 { 
+  color: #666; 
+  margin-bottom: 20px; 
+}
 
 /* Helpers */
 
 .hover-shadow:hover,
-.shadow { -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); }
+.shadow { 
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); 
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); 
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); 
+}
 
-.border-right { border-right: 1px dotted #000; }
+.border-right { 
+  border-right: 1px dotted #000; 
+}
 
-.white-background { background: #fff; }
+.white-background { 
+  background: #fff; 
+}
 
 .padding-30 { padding: 30px; }
 
@@ -29,33 +51,34 @@ h2 { color: #666; margin-bottom: 20px; }
 
 /* Box list */
 
-/* .box-list .background { padding: 5px 15px; } */
-/* .box-list:hover .background { background-color: rgba(255,255,255,0.90); } */
-
-/* .box-list ul { list-style: none; min-height: 200px; padding: 0; } */
-/* .box-list ul li { background: rgba(255,255,255,0.02); color: #666; font-size: 11px; height: 25px; line-height: 20px; margin: 2px 0; overflow: hidden; padding: 3px 0; } */
-
-/* .box-list ul li:first-child { background: rgba(77,167,79,0.07); font-size: 13px; font-weight: bold; } */
-/* .box-list ul li:nth-child(2), */
-/* .box-list ul li:nth-child(3) { background: rgba(255,255,255,0.04); font-size: 13px; } */
-
-/* .box-list ul li:hover { margin-left: -5px; background: rgba(120,120,120,0.1); } */
-
-/* .list { padding: 15px; } */
-
 .box-list ul {
   list-style-type: none;
   padding: 0;
 }
 
+.box-list li {
+  position: relative;
+}
+.box-list li:hover {
+  background: white;
+}
+
 .box-list li > a {
   display: block;
   margin: 10px 0;
-  padding: 1px 10px 10px 10px;
+  padding: 1px 60px 10px 10px;
 }
 .box-list li > a:hover {
   background: white;
   text-decoration: none;
+}
+
+.box-list li > a h3 {
+  margin-top: 10px;
+}
+
+.box-list li > a .description {
+  color: #404040;
 }
 
 .box-list li > a .meta {
@@ -63,19 +86,95 @@ h2 { color: #666; margin-bottom: 20px; }
   color: #666;
 }
 
+.box-list li > a .meta .glyphicon {
+  margin: 0 3px 0 10px;
+}
+.box-list li > a .meta .glyphicon:first-child {
+  margin: 0 3px 0 0;
+}
+
+.box-list li .launch a {
+  font-size: 150%;
+  /* display: none; */
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  opacity: .1;
+  background: black;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.box-list li:hover .launch a {
+  /* display: block; */
+  opacity: 1;
+  /* background: #ef2e32; */
+  background: #9ecde4;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.15);
+}
+.box-list li:hover .launch a:hover {
+  text-decoration: none;
+  background: #6eabcb;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  top: 11px;
+  right: 9px;
+  transition: .3s background-color;
+}
+.box-list li:hover .launch a:active,
+.box-list li .launch a:active {
+  outline: none;
+  text-decoration: none;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.25);
+  top: 12px;
+  right: 8px;
+  text-shadow: none;
+}
+
 /* Header */
-.navbar { background: #111; border-top: 3px solid #ef2e32; font-family: Overpass,"Helvetica Neue",Helvetica,Arial,sans-serif; min-height: 40px; }
+.navbar { 
+  background: #eee; 
+  overflow: hidden;
+  border-radius: 0;
+  margin-bottom: 0;
+  border-bottom: 2px solid #ef2e32;
+}
 
-.navbar-brand { background: url(../img/oo-index-logo.png); height: 26px; margin: 8px 10px 0; padding: 0; text-indent: -5000em; width: 118px; }
-.navbar-brand h1 { display: inline; }
+.navbar-brand {
+  height: auto;
+  padding: 0;
+}
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+  margin-left: 0;
+}
 
-.navbar-nav > li > a { background: #333; color: #ccc; font-size: 12px; line-height: 21px; margin: 5px 0 0 2px; padding: 5px 10px; text-transform: uppercase; }
-.nav > li > a:hover, .nav > li > a:focus { background: #aaa; color: #000; }
+.navbar-nav {
+  margin-top: 20px;
+  background: white;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+.navbar-nav  li  a { 
+  color: #505050;
+  font-size: 14px; 
+}
+.navbar-nav li a:hover {
+  background: #f8f8f8;
+}
 
-.navbar-nav > .active > a,
-.navbar-nav > .active > a:hover,
-.navbar-nav > .active > a:focus { background: #000; color: #fff; }
-
+/* Subheader section */
+.sub-header {
+  background: white;
+  padding: 30px 0;
+  text-align: center;
+  font-size: 18px;
+  /* border: 1px solid; */
+  /* border-color: #ccc transparent; */
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+}
 
 /* Forms */
 
@@ -84,19 +183,23 @@ h2 { color: #666; margin-bottom: 20px; }
 label { color: #666; }
 
 #search_form .form-control {
-  width: 94%;
+  width: 90%;
+  margin: 0 auto;
   height: auto;
+  background: url('../img/magnifying-glass.png') no-repeat 98% center;
+}
+#search_form .btn {
+  display: none;
 }
 
 
 /* Footer */
 
-footer { background: #333; bottom: 0; min-height: 100px; position: fixed; width: 100%; z-index: 1; }
-
-footer.row {
-  margin-left: 0;
-  margin-right: 0;
-  padding-top: 10px;
+footer { 
+  background: #333; 
+  bottom: 0; 
+  width: 100%; 
+  padding: 20px 0;
 }
 
 footer .sponsor {
@@ -119,6 +222,7 @@ footer .social a {
   }
 }
 
+/** Messages **/
 .flash-error {
     background-color: #e32;
     color: #fff;
@@ -177,3 +281,13 @@ footer .social a {
 
 /* --- /Search page --- */
 
+
+/* --- Content pages --- */
+body.content > div.container-fluid {
+  background: white;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+body.content > div.container-fluid  header {
+  border-bottom: 1px solid #ccc;
+}

@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'ooindex';
-	src:url('../fonts/ooindex.eot?-y33euq');
-	src:url('../fonts/ooindex.eot?#iefix-y33euq') format('embedded-opentype'),
-		url('../fonts/ooindex.woff?-y33euq') format('woff'),
-		url('../fonts/ooindex.ttf?-y33euq') format('truetype'),
-		url('../fonts/ooindex.svg?-y33euq#ooindex') format('svg');
+	src:url('../fonts/ooindex.eot?-lbhqag');
+	src:url('../fonts/ooindex.eot?#iefix-lbhqag') format('embedded-opentype'),
+		url('../fonts/ooindex.woff?-lbhqag') format('woff'),
+		url('../fonts/ooindex.ttf?-lbhqag') format('truetype'),
+		url('../fonts/ooindex.svg?-lbhqag#ooindex') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -28,6 +28,9 @@
 }
 .icon-reddit:before {
 	content: "\e601";
+}
+.icon-rocket:before {
+	content: "\e608";
 }
 .icon-googleplus:before {
 	content: "\e604";

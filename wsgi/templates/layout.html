@@ -8,61 +8,66 @@
 	{% endblock %}
 </head>
 
-<body>
+<body class="{{body_class}}" {% if g.user %} class="logged-in"{% endif %}>
 
-<header class="navbar navbar-fixed-top shadow" role="navigation">
-	<div class="container">
+<header class="navbar" role="navigation">
+	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
+				<span class="sm-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="/" class="navbar-brand"><h1>OpenShift Origin Index</h1></a>
+			<a href="/" class="navbar-brand">
+				<h1>
+					<img src="static/img/oo-index-logo.png" alt="OpenShift Origin Index">
+				</h1>
+			</a>
 		</div>
+	<!-- <div class="collapse navbar-collapse"> -->
+	<!-- 	<form class="search-header" action="get"> -->
+	<!-- 		<input type="text" name="query" placeholder="Search"> -->
+	<!-- 		<input class="btn" type="submit" value="Search"> -->
+	<!-- 	</form> -->
+	<!-- </div> -->
 		<div class="collapse navbar-collapse">
-
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="/">Home</a></li>
-				<li class="active"><a href="/about">About</a></li>
-				
+				<li><a href="/help">Help</a></li>
+				<li><a href="/about">About</a></li>
 {% if g.user %}
+				<li><a href="https://github.com/{{ g.user }}/">Logged in as {{ g.user }}</a></li>
 				<li><a href="/logout">Sign out</a></li>
 {% else %}
 				<li><a href="/login">Sign in</a></li>
-{% endif %}
-				<li><a href="/help">Help</a></li>
-{% if g.user %}
-				<li><a href="https://github.com/{{ g.user }}/">Logged as {{ g.user }}</a></li>
 {% endif %}
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
 </header>
 
-<div class="container shadow">
-	<div class="container">
-		{% block content %}{% endblock %}
-	</div>
+<div class="container-fluid">
+	{% block content %}{% endblock %}
 </div>
 
-<footer class="row">
-	<div class="sponsor col-md-6">
-		<p>
-			OpenShift Origin and the OpenShift Origin index are Red Hat sponsored projects.
-		</p>
-	</div>
-	<div class="social col-md-6">
-		<ul class="nav nav-pills">
-			<li><a href="https://twitter.com/openshift" target="_blank"><span class="icon icon-twitter"></span></a></li>
-			<li><a href="http://www.reddit.com/r/OpenShift/" target="_blank"><span class="icon icon-reddit"></span></a></li>
-			<li><a href="http://stackoverflow.com/questions/tagged/openshift" target="_blank"><span class="icon icon-stackoverflow"></span></a></li>
-			<li><a href="https://plus.google.com/u/0/communities/114361859072744017486" target="_blank"><span class="icon icon-googleplus"></span></a></li>
-			<li><a href="http://www.slideshare.net/openshift" target="_blank"><span class="icon icon-slideshare"></span></a></li>
-			<li><a href="https://github.com/openshift" target="_blank"><span class="icon icon-github"></span></a></li>
-			<li><a href="https://www.youtube.com/user/rhopenshift" target="_blank"><span class="icon icon-youtube"></span></a></li>
-		</ul>
+<footer class="container-fluid">
+	<div class="row">
+		<div class="sponsor col-md-6">
+			<p>
+				OpenShift Origin and the OpenShift Origin index are Red Hat sponsored projects.
+			</p>
+		</div>
+		<div class="social col-md-6">
+			<ul class="nav nav-pills">
+				<li><a href="https://twitter.com/openshift" target="_blank"><span class="icon icon-twitter"></span></a></li>
+				<li><a href="http://www.reddit.com/r/OpenShift/" target="_blank"><span class="icon icon-reddit"></span></a></li>
+				<li><a href="http://stackoverflow.com/questions/tagged/openshift" target="_blank"><span class="icon icon-stackoverflow"></span></a></li>
+				<li><a href="https://plus.google.com/u/0/communities/114361859072744017486" target="_blank"><span class="icon icon-googleplus"></span></a></li>
+				<li><a href="http://www.slideshare.net/openshift" target="_blank"><span class="icon icon-slideshare"></span></a></li>
+				<li><a href="https://github.com/openshift" target="_blank"><span class="icon icon-github"></span></a></li>
+				<li><a href="https://www.youtube.com/user/rhopenshift" target="_blank"><span class="icon icon-youtube"></span></a></li>
+			</ul>
+		</div>
 	</div>
 </footer>
 
