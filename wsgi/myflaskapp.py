@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os, sys, re
-import ast
 import json
 import requests
 import github as PyGitHub
@@ -164,7 +163,7 @@ class Quickstarts:
             raise
 
         try:
-            qstarts = ast.literal_eval(content)
+            qstarts = json.loads(content, object_pairs_hook=OrderedDict)
             for qstart in qstarts:
                 if qstart['type'].lower() == 'quickstart' and qstart.has_key('cartridges') and not qstart.has_key('launch_url'):
                     qstart['launch_url'] = make_launch_url(qstart['git_repo_url'], qstart['cartridges'], qstart['default_app_name'])
@@ -381,7 +380,7 @@ def _read_github_file(username, reponame, filename):
     head = repo.get_commit('HEAD')
     tree = repo.get_git_tree(head.sha, recursive=True)
     blob = _get_tree_element(repo, tree, filename)
-    content = requests.get(blob.url, headers={'Accept': 'application/vnd.github.v3.raw+json'}).json()
+    content = requests.get(blob.url, headers={'Accept': 'application/vnd.github.v3.raw+json'}).json(object_pairs_hook=OrderedDict)
 
     return repo, head, tree, content
 
