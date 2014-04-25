@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os, sys, re
-import ast
 import json
 import requests
 import github as PyGitHub
@@ -143,7 +142,7 @@ class Quickstarts:
             raise
 
         try:
-            qstarts = ast.literal_eval(content)
+            qstarts = json.loads(content, object_pairs_hook=OrderedDict)
             for qstart in qstarts:
                 if qstart['type'].lower() == 'quickstart' and qstart.has_key('cartridges') and not qstart.has_key('launch_url'):
                     qstart['launch_url'] = make_launch_url(qstart['git_repo_url'], qstart['cartridges'], qstart['default_app_name'])
