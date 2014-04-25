@@ -125,6 +125,27 @@ class Quickstarts:
     cached = None
 
     def __init__(self):
+        return self.load_data()
+
+    def sync_data(self):
+        index = []
+ 
+        #read the current quickstart file
+        for item in self.all():
+            #refresh the stats for each record
+            index.append(_read_quickstart_repo(item['owner'], item['name']))
+
+        #write out an updated quickstart file
+        self.save_data(index)
+        return json.dumps(index)
+
+    def save_data(self, data):
+        qs_json = open(app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH'], 'w')
+        qs_json.write(data)
+        qs_json.close()
+        self.data = data
+ 
+    def load_data(self):
         self.path = app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH']
         self.data = Quickstarts.cached
 
@@ -276,6 +297,10 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route('/sync')
+def sync():
+    return _update_quickstart_data()
+
 @app.route('/help')
 def help():
     return render_template('help.html')
@@ -405,6 +430,10 @@ def _read_quickstart_repo(username, reponame):
     print 'Reading quickstart repo metadata %s/%s' % (username, reponame)
     return _filter_repo_fields(_get_repo_for(username, reponame))
 
+def _update_quickstart_data():
+    q = Quickstarts()
+    return q.sync_data()
+
 def send_pull_request(form_data):
     # read metadata of new quickstart repo
     qs_u = form_data['github-username']
@@ -433,7 +462,7 @@ def send_pull_request(form_data):
         qs['owner_name']       = qs['owner']
         qs['owner_avatar_url'] = ''
 
-    # read content of original quickstar.json
+    # read content of original quickstart.json
     # fork repo if needed
     u = app.config['OO_INDEX_GITHUB_USERNAME']
     r = app.config['OO_INDEX_GITHUB_REPONAME']
