@@ -2840,5 +2840,30 @@
       "submitted_at": "2014-04-23T12:48:00.104696", 
       "owner_name": "Crunchy Data Solutions", 
       "owner_avatar_url": "https://avatars.githubusercontent.com/u/5797289?"
+   }, 
+   {
+      "updated_at": "2014-04-17T02:59:28Z", 
+      "owner": "https://github.com/smerrill", 
+      "id": 14366987, 
+      "description": "The best Drupal 7 quickstart for OpenShift.", 
+      "size": 3884, 
+      "forks": 0, 
+      "watchers": 0, 
+      "name": "pressflow-7-quickstart", 
+      "language": "PHP", 
+      "created_at": "2013-11-13T14:56:42Z", 
+      "stargazers": 0, 
+      "owner_type": "User", 
+      "default_app_name": "drupal", 
+      "cartridges": [
+         "php-5.3", 
+         "mysql-5.5", 
+         "https://cartreflect-claytondev.rhcloud.com/reflect?github=smerrill/openshift-community-pressflow7"
+      ], 
+      "git_repo_url": "https://github.com/smerrill/pressflow-7-quickstart.git", 
+      "type": "quickstart", 
+      "submitted_at": "2014-04-24T03:05:41.763797", 
+      "owner_name": "Steven Merrill", 
+      "owner_avatar_url": "https://avatars.githubusercontent.com/u/156815?"
    }
 ]
