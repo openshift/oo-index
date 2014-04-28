@@ -630,26 +630,26 @@
       "submitted_at": "2014-03-04T19:11:17.000000"
    }, 
    {
-      "watchers": "24", 
+      "watchers": "39", 
       "type": "QuickStart", 
       "name": "owncloud", 
       "language": "PHP", 
-      "git_repo_url": "https://github.com/ichristo/owncloud-openshift-quickstart", 
+      "git_repo_url": "https://github.com/openshift/owncloud-openshift-quickstart", 
       "created_at": "2012-09-02T06:45:18Z", 
       "description": "OpenShift ownCloud Quickstart", 
       "updated_at": "2013-12-31T16:40:43Z", 
       "id": 5646336, 
       "cartridges": [
-         "php-5.3", 
-         "mysql-5.1", 
+         "php-5.4", 
+         "mysql-5.5", 
          "cron-1.4"
       ], 
       "default_app_name": "owncloud", 
-      "owner": "https://github.com/ichristo", 
+      "owner": "https://github.com/openshift", 
       "owner_type": "User", 
       "size": 23755, 
-      "stargazers": "24", 
-      "forks": "21", 
+      "stargazers": "5", 
+      "forks": "23", 
       "submitted_at": "2014-03-04T19:11:17.000000"
    }, 
    {
