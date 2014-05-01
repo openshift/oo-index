@@ -1,27 +1,4 @@
-
-   {
-      "updated_at": "2014-03-31T13:48:29Z", 
-      "owner": "https://github.com/jmccormick2001", 
-      "id": 18120952, 
-      "description": "VoltDB - community version - openshift cartridge", 
-      "size": 97716, 
-      "forks": 0, 
-      "watchers": 2, 
-      "name": "voltdb-cart", 
-      "language": "Shell", 
-      "created_at": "2014-03-25T23:55:40Z", 
-      "stargazers": 2, 
-      "owner_type": "User", 
-      "default_app_name": "JeffsVoltDBCart", 
-      "cartridges": [
-         ""
-      ], 
-      "git_repo_url": "https://github.com/jmccormick2001/voltdb-cart.git", 
-      "type": "cartridge", 
-      "submitted_at": "2014-04-24T23:45:18.928530", 
-      "owner_name": "Jeff McCormick", 
-      "owner_avatar_url": "https://avatars.githubusercontent.com/u/863211?"
-   },
+   [
       {
       "updated_at": "2014-04-15T15:27:10Z", 
       "owner": "https://github.com/worldline", 
