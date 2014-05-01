@@ -55,7 +55,10 @@ except KeyError, ex:
     print >>sys.stderr, "Missing config: %s (Please fix)" % ex
 
 try:
-    app.config['GITHUB_CALLBACK_URL'] = 'https://' + os.environ['OPENSHIFT_APP_DNS'] + '/login/callback'
+    if 'HOST' in os.environ:
+        app.config['GITHUB_CALLBACK_URL'] = 'https://' + os.environ['HOST'] + '/login/callback'
+    else:
+        app.config['GITHUB_CALLBACK_URL'] = 'https://' + os.environ['OPENSHIFT_APP_DNS'] + '/login/callback'
 except KeyError:
     app.config['GITHUB_CALLBACK_URL'] = 'http://localhost:5000' + '/login/callback'
 
