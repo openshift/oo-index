@@ -1,5 +1,29 @@
 [
    {
+      "updated_at": "2014-04-21T20:16:30Z", 
+      "owner": "https://github.com/sheepkiller", 
+      "id": 19004959, 
+      "description": "racktables quickstart for openshift", 
+      "size": 1096, 
+      "forks": 0, 
+      "watchers": 0, 
+      "name": "racktables-quickstart", 
+      "language": "PHP", 
+      "created_at": "2014-04-21T19:55:03Z", 
+      "stargazers": 0, 
+      "owner_type": "User", 
+      "default_app_name": "racktables", 
+      "cartridges": [
+         "mysql-5.1", 
+         "php-5.3"
+      ], 
+      "git_repo_url": "https://github.com/sheepkiller/racktables-quickstart.git", 
+      "type": "quickstart", 
+      "submitted_at": "2014-05-03T19:23:58.949752", 
+      "owner_name": "", 
+      "owner_avatar_url": "https://avatars.githubusercontent.com/u/935185?"
+   }, 
+   {
       "updated_at": "2014-03-22T02:56:08Z", 
       "owner": "https://github.com/andrewklau", 
       "id": 17607460, 
