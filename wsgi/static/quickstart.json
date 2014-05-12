@@ -1,5 +1,29 @@
 [
    {
+      "updated_at": "2014-04-29T02:55:14Z", 
+      "owner": "https://github.com/muffycompo", 
+      "id": 17040260, 
+      "description": "", 
+      "size": 362, 
+      "forks": 3, 
+      "watchers": 8, 
+      "name": "openshift-laravel4-quickstart-app", 
+      "language": "PHP", 
+      "created_at": "2014-02-21T00:12:44Z", 
+      "stargazers": 8, 
+      "owner_type": "User", 
+      "default_app_name": "Laravel4.1", 
+      "cartridges": [
+         "php-5", 
+         "mysql-5"
+      ], 
+      "git_repo_url": "https://github.com/muffycompo/openshift-laravel4-quickstart-app.git", 
+      "type": "quickstart", 
+      "submitted_at": "2014-05-12T20:05:36.886198", 
+      "owner_name": "Mfawa Alfred Onen", 
+      "owner_avatar_url": "https://avatars.githubusercontent.com/u/780240?"
+   }, 
+   {
       "updated_at": "2014-04-21T20:16:30Z", 
       "owner": "https://github.com/sheepkiller", 
       "id": 19004959, 
@@ -3052,8 +3076,8 @@
       "submitted_at": "2014-04-25T16:30:44.837471", 
       "owner_name": null, 
       "owner_avatar_url": "https://avatars.githubusercontent.com/u/7138497?"
-   },
-      {
+   }, 
+   {
       "updated_at": "2014-05-03T19:50:12Z", 
       "owner": "https://github.com/openshift", 
       "id": 15721849, 
