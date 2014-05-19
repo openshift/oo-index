@@ -22,6 +22,7 @@
                 <h4 class="package_title">
                     {{qs.name}}
                 </h4>
+              </a>
                 <p class="description">{{qs.description}}</p>
                 <div class="meta">
                     <span class="glyphicon glyphicon-tag"></span>{{qs.language}}
@@ -29,8 +30,8 @@
                     <span class="glyphicon glyphicon-eye-open"></span>{{qs.watchers}}
                     <span class="glyphicon glyphicon-star"></span>{{qs.stargazers}}
                     <span class="glyphicon glyphicon-time"></span>last update: {{qs.updated_at}}
+                    <a href="/package?quickstarts={{qs.name}}"><span class="glyphicon glyphicon-gift"></span></a>
                 </div>
-              </a>
               {% if qs.launch_url %}
                 <div class="launch">
                     <a title="Launch {{qs.name}}" href='{{qs.launch_url}}'>

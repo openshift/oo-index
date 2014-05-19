@@ -7,9 +7,10 @@ import github as PyGitHub
 import dateutil.parser
 import datetime
 
-from flask import Flask, g, request, session, url_for, redirect, flash, render_template
+from flask import Flask, g, request, session, url_for, redirect, flash, render_template, make_response
 from flask_github import GitHub as AuthGitHub
 from flask_funnel import Funnel
+from flask import json as fjson
 
 from collections import OrderedDict
 from babel.dates import format_timedelta
@@ -344,6 +345,21 @@ def add():
             flash('%s: %s' % (ex.__class__, ex), 'error')
 
     return render_template('add.html', pr=pr) #, **form_data)
+
+@app.route('/package', defaults = {'quickstarts': 'all', 'download': 'False'})
+def package(quickstarts = "all", download = "False"):
+    serach_engine = SearchEngine()
+
+    query = request.args.get('quickstarts', "")
+    download = request.args.get('download', "False")
+    result = serach_engine.search(query)
+
+    if download == "True":
+        response = make_response(''.join(json.dumps(result)))
+        response.headers["Content-Disposition"] = "attachment;filename=quickstarts.json"
+        return response
+    else: 
+        return render_template('package.html', quickstarts=result, length=len(result), query=query)
 
 def _get_tree_element(repo, tree, path):
     for el in tree.tree:
