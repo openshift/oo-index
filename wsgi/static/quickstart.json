@@ -1,5 +1,31 @@
 [
    {
+      "updated_at": "2014-06-03T15:40:45Z", 
+      "owner": "https://github.com/phase2", 
+      "id": 20448611, 
+      "description": "Run OpenAtrium on OpenShift.", 
+      "size": 0, 
+      "forks": 0, 
+      "watchers": 0, 
+      "name": "openatrium-2-quickstart", 
+      "language": "PHP", 
+      "created_at": "2014-06-03T15:36:57Z", 
+      "stargazers": 0, 
+      "owner_type": "Organization", 
+      "default_app_name": "openatrium", 
+      "cartridges": [
+         "php-5.3", 
+         "mysql-5.5", 
+         "cron", 
+         "https://cartreflect-claytondev.rhcloud.com/reflect?github=smerrill/openshift-community-pressflow7"
+      ], 
+      "git_repo_url": "https://github.com/phase2/openatrium-2-quickstart.git", 
+      "type": "quickstart", 
+      "submitted_at": "2014-06-03T16:04:16.364955", 
+      "owner_name": "Phase2", 
+      "owner_avatar_url": "https://avatars.githubusercontent.com/u/148441?"
+   }, 
+   {
       "updated_at": "2014-05-26T19:36:03Z", 
       "owner": "https://github.com/liveoak-io", 
       "id": 20196148, 
