@@ -1,5 +1,28 @@
 [
    {
+      "updated_at": "2014-06-06T06:17:45Z", 
+      "owner": "https://github.com/juhoffma", 
+      "id": 20253423, 
+      "description": "Downloadable Cartridge for OpenShift Online and Enterprise", 
+      "size": 27054, 
+      "forks": 1, 
+      "watchers": 1, 
+      "name": "openshift-origin-cartridge-cassandra", 
+      "language": "C++", 
+      "created_at": "2014-05-28T10:19:18Z", 
+      "stargazers": 1, 
+      "owner_type": "User", 
+      "default_app_name": "openshiftorigincartridgecassandra", 
+      "cartridges": [
+         ""
+      ], 
+      "git_repo_url": "https://github.com/juhoffma/openshift-origin-cartridge-cassandra.git", 
+      "type": "cartridge", 
+      "submitted_at": "2014-06-09T18:18:59.578162", 
+      "owner_name": "Juergen Hoffmann", 
+      "owner_avatar_url": "https://avatars.githubusercontent.com/u/998315?"
+   }, 
+   {
       "updated_at": "2014-06-03T15:40:45Z", 
       "owner": "https://github.com/phase2", 
       "id": 20448611, 
