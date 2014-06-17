@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% set body_class = "search" %}
+{% block content %}
+
+<div class="row sub-header">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <p>
+            Find, browse, and share OpenShift cartridges and quickstarts.
+        </p>
+        {% include 'partials/search_form.html' %}
+    </div>
+</div>
+
+<div class="row box-list">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      {% if quickstarts %}
+        <h2>Package Results for {{query}}</h2>
+        <p>Copy the above text into your <b>/etc/openshift/quickstarts.json</b> file. 
+           Or <a href='/package?quickstarts={{query}}&download=True'>download</a> the file.</p>  
+        {% for  qs in quickstarts %}
+          {% if loop.index == length %}
+            {{qs|tojson|safe}}
+          {% else %}
+            {{qs|tojson|safe}},
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <br/>
+      <br/>
+    </div>
+</div>
+{% endblock %}
