@@ -1,5 +1,28 @@
 [
    {
+      "updated_at": "2014-04-30T22:49:23Z", 
+      "owner": "https://github.com/pcon", 
+      "id": 18192609, 
+      "description": "Openshift Deck.js Remote Quickstart", 
+      "size": 568, 
+      "forks": 0, 
+      "watchers": 4, 
+      "name": "openshift-deckjs-remote-quickstart", 
+      "language": "CSS", 
+      "created_at": "2014-03-27T21:46:56Z", 
+      "stargazers": 4, 
+      "owner_type": "User", 
+      "default_app_name": "deckjsremote", 
+      "cartridges": [
+         "nodejs-0.10"
+      ], 
+      "git_repo_url": "https://github.com/pcon/openshift-deckjs-remote-quickstart.git", 
+      "type": "quickstart", 
+      "submitted_at": "2014-06-17T21:01:11.767037", 
+      "owner_name": "Patrick Connelly", 
+      "owner_avatar_url": "https://avatars.githubusercontent.com/u/522876?"
+   }, 
+   {
       "updated_at": "2014-06-06T06:17:45Z", 
       "owner": "https://github.com/juhoffma", 
       "id": 20253423, 
