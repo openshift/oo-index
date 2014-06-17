@@ -7,7 +7,8 @@
 # install nodejs tools
 cd $OPENSHIFT_DATA_DIR
 npm --cache $PWD/.npm install uglify-js
-npm --cache $PWD/.npm install clean-css
+npm --cache $PWD/.npm install source-map@0.1.1
+npm --cache $PWD/.npm install clean-css@1.0.12
 
 # build assets bundles
 cd $OPENSHIFT_REPO_DIR
