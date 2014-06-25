@@ -1,5 +1,5 @@
 [
-   {
+{
       "updated_at": "2014-06-24T12:54:34Z", 
       "owner": "https://github.com/rkmallik", 
       "id": 18625938, 
@@ -14,7 +14,7 @@
       "owner_type": "User", 
       "default_app_name": "XWiki", 
       "cartridges": [
-         "jboseap-6"
+         "jbosseap-6"
       ], 
       "git_repo_url": "https://github.com/rkmallik/xwiki-example-H2.git", 
       "type": "quickstart", 
