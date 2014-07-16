@@ -1,9 +1,11 @@
 .idea
 *.iml
 node_modules
-static/bundle.css
-static/bundle.js
+wsgi/static/bundle.css
+wsgi/static/bundle.js
+wsgi/static/bundles/
 TODO
 .develo
 virtenv
 *.pyc
+*.swp

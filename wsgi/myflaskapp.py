@@ -34,13 +34,18 @@ app.config['CSS_BUNDLES'] = {
         'css/select2-bootstrap.css',
         'css/icons.css',
         'css/oo-index.css',
+        'css/jquery-ui.min.css',
+        'css/jquery-ui.theme.min.css',
+        'css/jquery-ui.structure.min.css',
     ),
 }
 
 app.config['JS_BUNDLES'] = {
     'bundle-js': (
         'js/jquery-2.1.0.js',
+        'js/jquery-ui.min.js',
         'js/bootstrap.js',
+        'js/oo-index.js',
     ),
 }
 
